@@ -14,8 +14,8 @@ does not mean the protocol is final.
 - [x] Composition compatibility rules exist.
 - [x] Minimal Receipt exists.
 - [x] Kalo can consume the descriptors through native `kalo spec` commands.
-- [ ] PDP-Connect experiment passes through the native Kalo path.
-- [ ] Held-out third source reuses the frozen downstream executable path.
+- [x] PDP-Connect experiment passes through the native Kalo path.
+- [x] Held-out third source reuses the frozen downstream executable path.
 - [x] PDPP bridge can be explained in no more than three pages.
 - [x] The bridge design requires no PDPP Core modification.
 - [x] No Kalo-specific concept is required by the standard.
@@ -24,8 +24,11 @@ does not mean the protocol is final.
 ## Current milestone
 
 The repository is at the **v0.1-alpha conceptual freeze**. Native Kalo evidence
-for the Amazon, DoorDash, and held-out Shop routes is being rebuilt in
-[`kalo-build/kalo-pdpp-spec`](https://github.com/kalo-build/kalo-pdpp-spec).
-The next gate is to freeze the Amazon and DoorDash common path, add Shop only
-after that freeze, and independently verify Kalo-generated Receipts without
-changing PDP-Connect Core.
+for Amazon and DoorDash was frozen first at
+[`spec-v0.1-alpha-common-freeze`](https://github.com/kalo-build/kalo-pdpp-spec/tree/spec-v0.1-alpha-common-freeze).
+Held-out Shop was then added at
+[`spec-v0.1-alpha-pdpp-evidence`](https://github.com/kalo-build/kalo-pdpp-spec/tree/spec-v0.1-alpha-pdpp-evidence)
+without changing the frozen Purchase-to-SpendEvent path. Kalo generated the
+Receipts and an independent verifier checked all three routes. The remaining
+gate is independent external technical review; implementation work stops here
+until that feedback exists.
