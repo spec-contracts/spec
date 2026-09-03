@@ -19,12 +19,11 @@
     "$schema": {"type": "string"},
     "spec": {"$ref": "base.schema.json#/$defs/specVersion"},
     "kind": {"const": "Composition"},
-    "address": {"$ref": "base.schema.json#/$defs/contractAddress"},
+    "address": {"$ref": "base.schema.json#/$defs/resourceAddress"},
     "namespace_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "family_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "version_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "version": {"$ref": "base.schema.json#/$defs/version"},
-    "digest": {"$ref": "base.schema.json#/$defs/digest"},
     "description": {"type": "string"},
     "nodes": {
       "type": "array",
@@ -34,9 +33,8 @@
         "required": ["id", "processor", "processor_version_id"],
         "properties": {
           "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
-          "processor": {"$ref": "base.schema.json#/$defs/contractAddress"},
+          "processor": {"$ref": "base.schema.json#/$defs/resourceAddress"},
           "processor_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
-          "processor_digest": {"$ref": "base.schema.json#/$defs/digest"},
           "implementation_id": {"$ref": "base.schema.json#/$defs/uuid"}
         },
         "additionalProperties": false
@@ -50,7 +48,7 @@
         "properties": {
           "from": {"$ref": "base.schema.json#/$defs/endpoint"},
           "to": {"$ref": "base.schema.json#/$defs/endpoint"},
-          "contract": {"$ref": "base.schema.json#/$defs/contractAddress"},
+          "contract": {"$ref": "base.schema.json#/$defs/resourceAddress"},
           "contract_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
           "binding": {"$ref": "base.schema.json#/$defs/bindingAddress"},
           "binding_version_id": {"$ref": "base.schema.json#/$defs/uuid"}
@@ -66,7 +64,7 @@
         "properties": {
           "name": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
           "to": {"$ref": "base.schema.json#/$defs/endpoint"},
-          "contract": {"$ref": "base.schema.json#/$defs/contractAddress"},
+          "contract": {"$ref": "base.schema.json#/$defs/resourceAddress"},
           "contract_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
           "binding": {"$ref": "base.schema.json#/$defs/bindingAddress"}
         },
@@ -81,7 +79,7 @@
         "properties": {
           "name": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
           "from": {"$ref": "base.schema.json#/$defs/endpoint"},
-          "contract": {"$ref": "base.schema.json#/$defs/contractAddress"},
+          "contract": {"$ref": "base.schema.json#/$defs/resourceAddress"},
           "contract_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
           "binding": {"$ref": "base.schema.json#/$defs/bindingAddress"}
         },
@@ -106,4 +104,3 @@
   },
   "additionalProperties": false
 }
-

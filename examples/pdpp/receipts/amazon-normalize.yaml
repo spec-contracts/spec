@@ -1,21 +1,20 @@
 $schema: ../../../schemas/v0/receipt.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Receipt
 receipt_id: cbf6ee8e-cb7f-4fb8-b53b-f6d4fbb5eecd
 execution_id: 83117a83-f168-4c33-aa50-d057e06213f1
 subject:
-  processor: PDPP:AMAZON-TO-PURCHASE@1
-  processor_version_id: de82f1d1-188f-4976-90d1-f0b7d19a15fe
-  processor_digest: sha256:6666666666666666666666666666666666666666666666666666666666666666
+  processor: SPECX:PDPP-AMAZON-TO-PURCHASE@1
+  processor_version_id: d091e1be-4949-4932-bd4f-6535a20b83b9
 status: succeeded
 started_at: "2026-09-03T10:00:00Z"
 ended_at: "2026-09-03T10:00:00.040Z"
 inputs:
   - port: order
-    contract: PDPP:AMAZON-ORDERS@1
-    contract_version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
-    binding: PDPP:AMAZON-ORDERS@1:JSON@1
-    binding_version_id: 0c48ea06-f4c8-47af-aa1f-00c59ebf6375
+    contract: SPECX:PDPP-AMAZON-ORDERS@1
+    contract_version_id: 1fe4eb16-ae6b-4f9b-8ae7-8ac5bd7a2b33
+    binding: SPECX:PDPP-AMAZON-ORDERS@1:JSON@1
+    binding_version_id: 202cc3d4-9de2-4e6e-8ca1-aa9e5e4bda2e
     artifact_digest: sha256:abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd
     source:
       system: PDP-Connect
@@ -24,9 +23,9 @@ inputs:
       digest: sha256:abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd
 outputs:
   - port: purchase
-    contract: COMMON:PURCHASE@1
-    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
-    binding: COMMON:PURCHASE@1:JSON@1
-    binding_version_id: b3cf27b8-6b86-463e-a28b-1910594b6e81
+    contract: SPECX:PURCHASE@1
+    contract_version_id: cf44e72f-08af-4c7b-a732-68c8078352d4
+    binding: SPECX:PURCHASE@1:JSON@1
+    binding_version_id: f87a0886-d589-451c-89b2-4af3069bacb0
     artifact_digest: sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
 

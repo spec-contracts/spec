@@ -23,14 +23,12 @@
     "subject": {
       "type": "object",
       "properties": {
-        "processor": {"$ref": "base.schema.json#/$defs/contractAddress"},
+        "processor": {"$ref": "base.schema.json#/$defs/resourceAddress"},
         "processor_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
-        "processor_digest": {"$ref": "base.schema.json#/$defs/digest"},
         "implementation_id": {"$ref": "base.schema.json#/$defs/uuid"},
         "implementation_digest": {"$ref": "base.schema.json#/$defs/digest"},
-        "composition": {"$ref": "base.schema.json#/$defs/contractAddress"},
-        "composition_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
-        "composition_digest": {"$ref": "base.schema.json#/$defs/digest"}
+        "composition": {"$ref": "base.schema.json#/$defs/resourceAddress"},
+        "composition_version_id": {"$ref": "base.schema.json#/$defs/uuid"}
       },
       "oneOf": [
         {"required": ["processor", "processor_version_id"]},
@@ -56,7 +54,7 @@
         "required": ["port", "contract", "access"],
         "properties": {
           "port": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
-          "contract": {"$ref": "base.schema.json#/$defs/contractAddress"},
+          "contract": {"$ref": "base.schema.json#/$defs/resourceAddress"},
           "access": {"enum": ["read", "write", "read-write", "append", "delete"]},
           "before_digest": {"$ref": "base.schema.json#/$defs/digest"},
           "after_digest": {"$ref": "base.schema.json#/$defs/digest"}
@@ -71,9 +69,8 @@
         "required": ["node", "processor", "processor_version_id"],
         "properties": {
           "node": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
-          "processor": {"$ref": "base.schema.json#/$defs/contractAddress"},
+          "processor": {"$ref": "base.schema.json#/$defs/resourceAddress"},
           "processor_version_id": {"$ref": "base.schema.json#/$defs/uuid"},
-          "processor_digest": {"$ref": "base.schema.json#/$defs/digest"},
           "receipt_id": {"$ref": "base.schema.json#/$defs/uuid"}
         },
         "additionalProperties": false
@@ -89,4 +86,3 @@
   },
   "additionalProperties": false
 }
-

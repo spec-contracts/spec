@@ -1,22 +1,20 @@
 $schema: ../../../schemas/v0/representation-binding.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: RepresentationBinding
-address: COMMON:PURCHASE@1:JSON@1
-parent: COMMON:PURCHASE@1
-namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
-family_id: f7e4282f-c944-4511-8f4d-64c26b6c3cc5
-version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
-binding_id: 64097762-47eb-4237-a3b6-7c620eeb7588
-binding_version_id: b3cf27b8-6b86-463e-a28b-1910594b6e81
+address: SPECX:PURCHASE@1:JSON@1
+parent: SPECX:PURCHASE@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: fe2479b0-264d-4c72-b236-02b6f43935f1
+version_id: cf44e72f-08af-4c7b-a732-68c8078352d4
+binding_id: 284d65cd-4626-42b3-a80b-d4ff0d38e469
+binding_version_id: f87a0886-d589-451c-89b2-4af3069bacb0
 binding: JSON
 binding_version: "1"
 media_type: application/json
 syntax_version: JSON Schema 2020-12
-digest: sha256:4444444444444444444444444444444444444444444444444444444444444444
 representation:
   standard: JSON Schema 2020-12
   artifact:
     ref: ../representations/purchase.schema.json
     media_type: application/schema+json
-    digest: sha256:4444444444444444444444444444444444444444444444444444444444444444
-
+    digest: sha256:98f7d51bf372ca2e944902029dffb89221bf8f11b667a636504a00ef7a8aa72d

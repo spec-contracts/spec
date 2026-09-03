@@ -1,12 +1,11 @@
 $schema: ../../../schemas/v0/contract.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Contract
-address: PDPP:SHOP-ORDERS@1
-namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
-family_id: df3c7d52-72f1-4660-aa77-f08703078f20
-version_id: 3e5779ca-836d-4064-941a-b3682edd3441
+address: SPECX:PDPP-SHOP-ORDERS@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: 5f1f7362-fdf9-463f-bf8e-4074eb3807d0
+version_id: 63ee33bd-eb06-4aca-b09e-65cacdba0d46
 version: "1"
-digest: sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 description: A synthetic third-party shop order used for the extension test.
 definition:
   body: >-
@@ -14,5 +13,5 @@ definition:
     field names and monetary encoding retain source semantics until an explicit
     normalization Processor produces a shared Contract.
 bindings:
-  - PDPP:SHOP-ORDERS@1:JSON@1
+  - SPECX:PDPP-SHOP-ORDERS@1:JSON@1
 

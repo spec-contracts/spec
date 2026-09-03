@@ -17,12 +17,11 @@
     "$schema": {"type": "string"},
     "spec": {"$ref": "base.schema.json#/$defs/specVersion"},
     "kind": {"const": "Processor"},
-    "address": {"$ref": "base.schema.json#/$defs/contractAddress"},
+    "address": {"$ref": "base.schema.json#/$defs/resourceAddress"},
     "namespace_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "family_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "version_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "version": {"$ref": "base.schema.json#/$defs/version"},
-    "digest": {"$ref": "base.schema.json#/$defs/digest"},
     "description": {"type": "string"},
     "definition": {"$ref": "base.schema.json#/$defs/definition"},
     "inputs": {
@@ -87,4 +86,3 @@
   ],
   "additionalProperties": false
 }
-

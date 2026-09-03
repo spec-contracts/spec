@@ -2,6 +2,9 @@
 
 Status: non-normative v0 integration design
 
+> This profile is an independent experimental interoperability study and is
+> not endorsed by or part of PDP-Connect unless stated otherwise.
+
 ## Boundary
 
 The bridge is an adapter outside PDP-Connect Core. PDP-Connect remains
@@ -27,15 +30,16 @@ The bridge has only four responsibilities.
 ## 1. Associate a PDPP source with a Contract
 
 A bridge configuration records the PDPP source identifier, its source version
-or immutable revision, and a SPEC Contract Version. Amazon and DoorDash are
-separate semantic sources even if portions of their JSON happen to have the
-same shape.
+or immutable revision, and a SPEC Contract Version. Experimental Contract
+addresses use the SPEC-owned `SPECX` namespace; they do not claim PDP-Connect
+namespace authority. Amazon and DoorDash are separate semantic sources even if
+portions of their JSON happen to have the same shape.
 
 ```yaml
 source: amazon.orders
 source_version: synthetic-v1
-contract: PDPP:AMAZON-ORDERS@1
-contract_version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
+contract: SPECX:PDPP-AMAZON-ORDERS@1
+contract_version_id: 1fe4eb16-ae6b-4f9b-8ae7-8ac5bd7a2b33
 ```
 
 This association is deployment configuration. It does not modify the source
@@ -44,7 +48,7 @@ declaration in PDP-Connect Core.
 ## 2. Reuse the PDPP JSON Schema as a binding
 
 The source Contract lists a Representation Binding such as
-`PDPP:AMAZON-ORDERS@1:JSON@1`. Its representation artifact points at the
+`SPECX:PDPP-AMAZON-ORDERS@1:JSON@1`. Its representation artifact points at the
 existing or exported PDPP JSON Schema and records a digest. SPEC does not copy
 the JSON Schema language or reinterpret structural validation as semantic
 identity.
@@ -58,10 +62,10 @@ must bind a new Contract Version.
 Each source normalization is a separate Processor:
 
 ```text
-PDPP:AMAZON-ORDERS@1   -> COMMON:PURCHASE@1
-PDPP:DOORDASH-ORDERS@1 -> COMMON:PURCHASE@1
-PDPP:SHOP-ORDERS@1     -> COMMON:PURCHASE@1
-COMMON:PURCHASE@1      -> COMMON:SPEND-EVENT@1
+SPECX:PDPP-AMAZON-ORDERS@1   -> SPECX:PURCHASE@1
+SPECX:PDPP-DOORDASH-ORDERS@1 -> SPECX:PURCHASE@1
+SPECX:PDPP-SHOP-ORDERS@1     -> SPECX:PURCHASE@1
+SPECX:PURCHASE@1      -> SPECX:SPEND-EVENT@1
 ```
 
 Kalo may host implementations and derive routes, but the declarations do not
@@ -97,4 +101,3 @@ The bridge does not redefine PDPP consent, grants, Personal Servers, Resource
 Servers, authentication, collection, source discovery, connector runtime
 behavior, or authorization. SPEC Receipts supplement source provenance; they do
 not replace PDPP audit or authorization records.
-

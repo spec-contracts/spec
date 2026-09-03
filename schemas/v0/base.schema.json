@@ -22,7 +22,7 @@
       "type": "string",
       "pattern": "^[0-9][A-Za-z0-9.-]*$"
     },
-    "contractAddress": {
+    "resourceAddress": {
       "type": "string",
       "pattern": "^[A-Z][A-Z0-9-]{0,62}:[A-Z][A-Z0-9-]{0,127}@[0-9][A-Za-z0-9.-]*$"
     },
@@ -75,6 +75,9 @@
           "required": ["ref"]
         }
       ],
+      "dependentRequired": {
+        "digest": ["ref"]
+      },
       "additionalProperties": false
     },
     "artifact": {
@@ -100,13 +103,10 @@
       "required": ["contract"],
       "properties": {
         "contract": {
-          "$ref": "#/$defs/contractAddress"
+          "$ref": "#/$defs/resourceAddress"
         },
         "version_id": {
           "$ref": "#/$defs/uuid"
-        },
-        "digest": {
-          "$ref": "#/$defs/digest"
         }
       },
       "additionalProperties": false
@@ -120,7 +120,7 @@
           "pattern": "^[a-z][a-z0-9_-]*$"
         },
         "contract": {
-          "$ref": "#/$defs/contractAddress"
+          "$ref": "#/$defs/resourceAddress"
         },
         "contract_version_id": {
           "$ref": "#/$defs/uuid"
@@ -149,7 +149,7 @@
           "pattern": "^[a-z][a-z0-9_-]*$"
         },
         "contract": {
-          "$ref": "#/$defs/contractAddress"
+          "$ref": "#/$defs/resourceAddress"
         },
         "contract_version_id": {
           "$ref": "#/$defs/uuid"
@@ -188,7 +188,7 @@
           "pattern": "^[a-z][a-z0-9_-]*$"
         },
         "contract": {
-          "$ref": "#/$defs/contractAddress"
+          "$ref": "#/$defs/resourceAddress"
         },
         "contract_version_id": {
           "$ref": "#/$defs/uuid"
@@ -217,4 +217,3 @@
     }
   }
 }
-

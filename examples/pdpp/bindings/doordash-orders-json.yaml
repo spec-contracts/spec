@@ -1,22 +1,26 @@
 $schema: ../../../schemas/v0/representation-binding.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: RepresentationBinding
-address: PDPP:DOORDASH-ORDERS@1:JSON@1
-parent: PDPP:DOORDASH-ORDERS@1
-namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
-family_id: 947299bc-a640-4659-8e35-b511f77aae7f
-version_id: a0f09907-4113-44c4-8cf9-e855d646c03c
-binding_id: 9cb46fa1-9d29-44f0-a359-11b26f385112
-binding_version_id: 8e42dce8-3c22-4d50-8fca-fb8afc2ec3e0
+address: SPECX:PDPP-DOORDASH-ORDERS@1:JSON@1
+parent: SPECX:PDPP-DOORDASH-ORDERS@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: dfce0e40-ecef-45f1-abc3-b41a79d4c3cf
+version_id: afba0860-8c54-4d08-8bd8-f4c66a2b02bc
+binding_id: fcd0b769-7626-4383-bf16-a59c69301196
+binding_version_id: eabe53dd-e6c2-40d8-8cd5-f90a3689b9b1
 binding: JSON
 binding_version: "1"
 media_type: application/json
 syntax_version: JSON Schema 2020-12
-digest: sha256:2222222222222222222222222222222222222222222222222222222222222222
 representation:
   standard: JSON Schema 2020-12
   artifact:
     ref: ../representations/doordash-orders.schema.json
     media_type: application/schema+json
-    digest: sha256:2222222222222222222222222222222222222222222222222222222222222222
-
+    digest: sha256:045826548fab98b7018acf91b8ad182a3d5be9fc6899c86d4913897cd017c805
+extensions:
+  SPECX:UPSTREAM:
+    protocol: PDP-Connect
+    source: doordash
+    stream: doordash.orders
+    status: illustrative-copy

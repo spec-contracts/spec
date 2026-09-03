@@ -1,0 +1,91 @@
+{
+  "task_id": "spec-c001-spec",
+  "series": "A",
+  "profile": "code-change",
+  "workspace_id": "spec-pdpp-kalo-evidence",
+  "workspace_root": "C:\\Users\\brenn\\go\\src\\github.com\\kalo-build\\spec-pdpp-kalo-evidence",
+  "parent_change": "SPEC-C001",
+  "repo_alias": "spec",
+  "query": "Freeze v0.1-alpha conceptual model and schemas for workspace change SPEC-C001: SPEC v0.1-alpha external review polish",
+  "status": "packed",
+  "created_at": "2026-09-03T14:18:20Z",
+  "updated_at": "2026-09-03T14:29:16Z",
+  "repo_root": "C:\\Users\\brenn\\go\\src\\github.com\\spec-contracts\\spec",
+  "workspace": "C:/Users/brenn/go/src/github.com/spec-contracts/spec/devspecs/tasks/spec-c001-spec",
+  "artifacts": {
+    "series": "A",
+    "index": "A00-index.md",
+    "first_slice": "A01-freeze-v0-1-alpha-conceptual-model-and-schemas-plan.md",
+    "result": "A01-freeze-v0-1-alpha-conceptual-model-and-schemas-result.md",
+    "slices": [
+      {
+        "id": "A01",
+        "title": "Freeze v0.1-alpha conceptual model and schemas",
+        "plan": "A01-freeze-v0-1-alpha-conceptual-model-and-schemas-plan.md",
+        "result": "A01-freeze-v0-1-alpha-conceptual-model-and-schemas-result.md",
+        "kind": "slice",
+        "stage": "validated",
+        "decision": "promote",
+        "updated_at": "2026-09-03T14:29:16Z",
+        "latest_checkpoint_id": "cp_20260903T142916Z_a01_validated",
+        "latest_checkpoint": "checkpoints/20260903-142916-validated.md",
+        "latest_checkpoint_json": "checkpoints/20260903-142916-validated.json"
+      }
+    ]
+  },
+  "predicted_context": {
+    "relevant_areas": [
+      "SPEC.md"
+    ],
+    "supporting_context": [
+      {
+        "path": "SPEC.md",
+        "title": "SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts",
+        "kind": "spec",
+        "role": "supporting_context",
+        "evidence": [
+          "section-packed context: SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 4. Descriptor envelope and encoding; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 9. Representation Bindings; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 20. Integration boundaries \u003e 20.1 PDP-Connect",
+          "indexed section match: SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 4. Descriptor envelope and encoding lines 73-93; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 8. Contracts lines 193-219",
+          "exact intent ID: direct path/title match",
+          "anchor-first ranking: score 24.000; matches v01alpha; fields title, heading, body",
+          "query term match in path: spec"
+        ]
+      }
+    ],
+    "related_git_receipts": [
+      {
+        "sha": "344571bdaa5f515a399edb3a13162eafef42b157",
+        "short_sha": "344571b",
+        "committed_at": "2026-09-03",
+        "subject": "Publish SPEC v0.1 descriptor-design baseline",
+        "matched_paths": [
+          "SPEC.md"
+        ],
+        "matched_terms": [
+          "spec"
+        ],
+        "signals": [
+          "touched 1 packed path(s)",
+          "matched query anchors"
+        ]
+      }
+    ]
+  },
+  "confidence": {
+    "primary_file_confidence": "low",
+    "test_coverage_confidence": "low",
+    "docs_config_confidence": "low",
+    "git_receipt_confidence": "medium",
+    "noise_risk": "low",
+    "pack_completeness": "low",
+    "why": [
+      "no clear primary implementation file was found",
+      "test companion coverage was not evident from the initial pack",
+      "found 1 related Git receipt(s)"
+    ],
+    "agent_instruction": "Validate the test and integration surface before editing. Record critical misses and distracting inclusions in the slice result or a task checkpoint."
+  },
+  "durability": {
+    "required": true
+  }
+}

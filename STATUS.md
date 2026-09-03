@@ -13,9 +13,9 @@ does not mean the protocol is final.
 - [x] Minimal effects and state vocabulary exists.
 - [x] Composition compatibility rules exist.
 - [x] Minimal Receipt exists.
-- [ ] Kalo can consume the descriptors.
-- [x] PDPP experiment passes in an executable host.
-- [x] Third-source descriptor demonstrates downstream route reuse.
+- [x] Kalo can consume the descriptors through native `kalo spec` commands.
+- [ ] PDP-Connect experiment passes through the native Kalo path.
+- [ ] Held-out third source reuses the frozen downstream executable path.
 - [x] PDPP bridge can be explained in no more than three pages.
 - [x] The bridge design requires no PDPP Core modification.
 - [x] No Kalo-specific concept is required by the standard.
@@ -23,9 +23,9 @@ does not mean the protocol is final.
 
 ## Current milestone
 
-The repository is at the **v0.1 descriptor-design baseline**. Executable Kalo
-evidence for the Amazon, DoorDash, and held-out Shop routes is preserved in
+The repository is at the **v0.1-alpha conceptual freeze**. Native Kalo evidence
+for the Amazon, DoorDash, and held-out Shop routes is being rebuilt in
 [`kalo-build/kalo-pdpp-spec`](https://github.com/kalo-build/kalo-pdpp-spec).
-The next milestone is a native Kalo adapter that loads the example catalog,
-derives the two-stage routes, and emits receipts without changing PDP-Connect
-Core.
+The next gate is to freeze the Amazon and DoorDash common path, add Shop only
+after that freeze, and independently verify Kalo-generated Receipts without
+changing PDP-Connect Core.

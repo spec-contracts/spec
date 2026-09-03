@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "COMMON:SPEND-EVENT@1 JSON binding",
+  "title": "SPECX:SPEND-EVENT@1 JSON binding",
   "type": "object",
   "required": ["event_id", "occurred_at", "amount", "source_ref"],
   "properties": {

@@ -1,0 +1,15 @@
+$schema: ../../../schemas/v0/namespace.schema.json
+spec: "0.1-alpha"
+kind: Namespace
+alias: SPECX
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+description: >-
+  Experimental resources owned by the SPEC project for examples and
+  interoperability studies only. SPECX does not claim authority for any
+  external project, source, or standard referenced by an example.
+authority:
+  name: SPEC project
+  proof: https://github.com/spec-contracts/spec
+resolver_hints:
+  - mechanism: filesystem
+    ref: ../

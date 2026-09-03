@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "COMMON:PURCHASE@1 JSON binding",
+  "title": "SPECX:PURCHASE@1 JSON binding",
   "type": "object",
   "required": ["purchase_id", "purchased_at", "status", "currency", "total_minor", "source_ref"],
   "properties": {

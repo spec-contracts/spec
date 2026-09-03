@@ -1,22 +1,20 @@
 $schema: ../../../schemas/v0/representation-binding.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: RepresentationBinding
-address: COMMON:SPEND-EVENT@1:JSON@1
-parent: COMMON:SPEND-EVENT@1
-namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
-family_id: fc6e0632-7821-4042-a938-2c0e0dedc5f7
-version_id: e93d2901-62b4-416c-8280-bf52225242f2
-binding_id: 7a3fa390-644e-4de4-ab07-e92056ea5be8
-binding_version_id: 44957a1b-f0df-423c-b723-709daae1d389
+address: SPECX:SPEND-EVENT@1:JSON@1
+parent: SPECX:SPEND-EVENT@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: fe87b736-6b3c-4291-995b-e9277682664f
+version_id: 7d21db84-7b15-4e41-a761-6bae2b3808f9
+binding_id: 4b46d021-21c4-4acb-a12d-88db52f57629
+binding_version_id: 1d807c60-c6bf-4112-a7e1-25743d432a68
 binding: JSON
 binding_version: "1"
 media_type: application/json
 syntax_version: JSON Schema 2020-12
-digest: sha256:5555555555555555555555555555555555555555555555555555555555555555
 representation:
   standard: JSON Schema 2020-12
   artifact:
     ref: ../representations/spend-event.schema.json
     media_type: application/schema+json
-    digest: sha256:5555555555555555555555555555555555555555555555555555555555555555
-
+    digest: sha256:de38e80db042aca1e999869ec110eae7bde7fc030ab9ff5cbcb2e160b82ff6f2

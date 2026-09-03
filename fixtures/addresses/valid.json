@@ -14,9 +14,9 @@
     "version": "1.0.0"
   },
   {
-    "address": "COMMON:PURCHASE@2026-09-draft",
+    "address": "SPECX:PURCHASE@2026-09-draft",
     "form": "resource",
-    "namespace": "COMMON",
+    "namespace": "SPECX",
     "name": "PURCHASE",
     "version": "2026-09-draft"
   },
@@ -30,13 +30,12 @@
     "binding_version": "1"
   },
   {
-    "address": "PDPP:AMAZON-ORDERS@1:JSON@1.1",
+    "address": "SPECX:PDPP-AMAZON-ORDERS@1:JSON@1.1",
     "form": "binding",
-    "namespace": "PDPP",
-    "name": "AMAZON-ORDERS",
+    "namespace": "SPECX",
+    "name": "PDPP-AMAZON-ORDERS",
     "version": "1",
     "binding": "JSON",
     "binding_version": "1.1"
   }
 ]
-

@@ -1,12 +1,11 @@
 $schema: ../../../schemas/v0/contract.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Contract
-address: PDPP:AMAZON-ORDERS@1
-namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
-family_id: a948ebf4-58e2-4337-9baa-12f69b149177
-version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
+address: SPECX:PDPP-AMAZON-ORDERS@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: 4bdfcd9e-a906-458c-ae10-c94961bd2025
+version_id: 1fe4eb16-ae6b-4f9b-8ae7-8ac5bd7a2b33
 version: "1"
-digest: sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 description: A synthetic Amazon order delivered by the amazon.orders source.
 definition:
   body: >-
@@ -14,5 +13,5 @@ definition:
     Monetary values and status names retain Amazon source semantics until an
     explicit normalization Processor produces a shared Contract.
 bindings:
-  - PDPP:AMAZON-ORDERS@1:JSON@1
+  - SPECX:PDPP-AMAZON-ORDERS@1:JSON@1
 

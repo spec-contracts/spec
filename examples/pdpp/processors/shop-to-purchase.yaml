@@ -1,30 +1,29 @@
 $schema: ../../../schemas/v0/processor.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Processor
-address: PDPP:SHOP-TO-PURCHASE@1
-namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
-family_id: 1e8175fe-41e9-487c-8ce1-3665c7bbf2da
-version_id: 38534b4a-a5ee-4418-812c-39bf71dd034d
+address: SPECX:PDPP-SHOP-TO-PURCHASE@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: 8a247f2f-3387-4d2a-9b0f-178e7d403fce
+version_id: 3a5d0fea-33ee-4a96-a1d2-13b7b440d439
 version: "1"
-digest: sha256:8888888888888888888888888888888888888888888888888888888888888888
 description: Normalize the optional synthetic Shop order into a shared Purchase.
 definition:
   body: >-
     Map Shop order identity, processing time, currency, total, merchant, and
-    source reference into COMMON:PURCHASE@1. Convert decimal total to exact
+    source reference into SPECX:PURCHASE@1. Convert decimal total to exact
     integer minor units according to the declared currency.
 inputs:
   - name: order
-    contract: PDPP:SHOP-ORDERS@1
-    contract_version_id: 3e5779ca-836d-4064-941a-b3682edd3441
+    contract: SPECX:PDPP-SHOP-ORDERS@1
+    contract_version_id: 63ee33bd-eb06-4aca-b09e-65cacdba0d46
     bindings:
-      - PDPP:SHOP-ORDERS@1:JSON@1
+      - SPECX:PDPP-SHOP-ORDERS@1:JSON@1
 outputs:
   - name: purchase
-    contract: COMMON:PURCHASE@1
-    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    contract: SPECX:PURCHASE@1
+    contract_version_id: cf44e72f-08af-4c7b-a732-68c8078352d4
     bindings:
-      - COMMON:PURCHASE@1:JSON@1
+      - SPECX:PURCHASE@1:JSON@1
 state: []
 effects:
   safe: true

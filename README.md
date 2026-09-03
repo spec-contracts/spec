@@ -1,18 +1,20 @@
-# SPEC
+# SPEC — Semantic Protocol for Explicit Contracts
 
-SPEC is an open protocol for defining addressable semantic contracts, binding
-them to machine representations, and composing independently implemented
-processing logic against those contracts.
+Addressable semantic contracts and composable processing boundaries.
+
+SPEC is an open protocol for defining those contracts, binding them to machine
+representations, and composing independently implemented processing logic
+against them.
 
 > Explicit by default. Inferential by extension.
 
-This repository contains the implementation-neutral SPEC v0.1 draft. Kalo is
-expected to be its first production-grade host and experimental testbed, but
-SPEC does not import, require, or prescribe Kalo.
+This repository contains the implementation-neutral SPEC v0.1-alpha draft.
+Kalo provides the first experimental native host, but SPEC does not import,
+require, or prescribe Kalo.
 
 ## Status
 
-SPEC v0.1 is an early design draft. Addresses and descriptors in this repository
+SPEC v0.1-alpha is an early design draft. Addresses and descriptors in this repository
 are suitable for implementation experiments, not yet for stable publication.
 See [STATUS.md](STATUS.md) for the external-review acceptance checklist.
 
@@ -37,8 +39,10 @@ KA:MO@1:YAML@1
 ACME:NORMALIZE-INVOICE@1
 ```
 
-Addresses are compact symbolic references. Immutable publication identity is
-separately carried by namespace, family, and version IDs plus a content digest.
+Addresses are compact symbolic references. Immutable semantic identity is
+separately carried by namespace, family, and version IDs. Exact-byte digests
+identify referenced artifacts and execution values; a catalog or publication
+record may separately digest descriptor bytes.
 
 ## Validate locally
 
@@ -47,8 +51,8 @@ python tools/validate.py
 ```
 
 The validator uses Python 3 plus `PyYAML` and `jsonschema`. It checks every
-schema, validates descriptor examples, tests address fixtures, and performs a
-small set of cross-descriptor integrity checks.
+schema, validates descriptor examples and exact artifact digests, tests address
+fixtures, and rejects the nine focused architectural negative fixtures.
 
 ## License
 

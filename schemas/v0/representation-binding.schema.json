@@ -21,7 +21,7 @@
     "spec": {"$ref": "base.schema.json#/$defs/specVersion"},
     "kind": {"const": "RepresentationBinding"},
     "address": {"$ref": "base.schema.json#/$defs/bindingAddress"},
-    "parent": {"$ref": "base.schema.json#/$defs/contractAddress"},
+    "parent": {"$ref": "base.schema.json#/$defs/resourceAddress"},
     "namespace_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "family_id": {"$ref": "base.schema.json#/$defs/uuid"},
     "version_id": {"$ref": "base.schema.json#/$defs/uuid"},
@@ -34,7 +34,6 @@
     "binding_version": {"$ref": "base.schema.json#/$defs/version"},
     "media_type": {"type": "string", "minLength": 1},
     "syntax_version": {"type": "string", "minLength": 1},
-    "digest": {"$ref": "base.schema.json#/$defs/digest"},
     "representation": {
       "type": "object",
       "required": ["standard"],
@@ -54,4 +53,3 @@
   },
   "additionalProperties": false
 }
-

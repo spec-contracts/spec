@@ -1,6 +1,6 @@
-# SPEC v0 — Addressable Semantic Contracts and Composition
+# SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts
 
-Status: Draft 0.1  
+Status: Draft 0.1-alpha
 Audience: implementers and technical reviewers
 
 ## 1. Scope
@@ -102,9 +102,8 @@ namespace        = ALPHA *( ALPHA / DIGIT / "-" )
 name             = ALPHA *( ALPHA / DIGIT / "-" )
 version          = DIGIT *( ALPHA / DIGIT / "." / "-" )
 binding          = ALPHA *( ALPHA / DIGIT / "-" )
-contract-address = namespace ":" name "@" version
-binding-address  = contract-address ":" binding "@" version
-processor-address = contract-address
+resource-address = namespace ":" name "@" version
+binding-address  = resource-address ":" binding "@" version
 ```
 
 In v0, `namespace`, `name`, and `binding` tokens MUST be uppercase ASCII. Each
@@ -125,7 +124,8 @@ KA:MO@1:YAML@1
 ACME:AMAZON-TO-PURCHASE@1
 ```
 
-The same three-part syntax is used for Contract and Processor addresses. The
+The same `resource-address` syntax is used for Contract, Processor, and
+Composition addresses. The
 descriptor kind and resolution context determine resource type; the spelling
 of the address does not.
 
@@ -142,28 +142,36 @@ versioned resources carry:
 
 - `namespace_id`: immutable UUID for the authority;
 - `family_id`: immutable UUID for the resource family;
-- `version_id`: immutable UUID for this published version; and
-- `digest`: content identity, initially `sha256:` plus 64 lowercase hex digits.
+- `version_id`: immutable UUID for this published version.
 
 Representation Bindings additionally carry `binding_id` and
 `binding_version_id` because the binding has a version lineage distinct from
 its parent Contract Version.
 
 The tuple `(namespace_id, family_id, version_id)` identifies a published
-resource version. A resolver MUST reject a result when IDs or a pinned digest
-do not match the requester's constraints. Once published, a Contract Version,
-Processor Version, or Representation Binding Version MUST be immutable.
+resource version. A resolver MUST reject a result when those IDs do not match
+the requester's constraints. Once published, a Contract Version, Processor
+Version, or Representation Binding Version MUST be immutable.
 
 A publisher MUST NOT silently retarget a symbolic address to a semantically
 different immutable version. Corrections that change normative meaning require
-a new address, `version_id`, and digest. Mirrors MAY serve identical content
-under the same identity.
+a new address and `version_id`. Mirrors MAY serve identical content under the
+same identity.
 
-Descriptor digests identify canonical published bytes or a containing signed
-manifest selected by the publisher. Core defines the digest string and
-verification requirement, but deliberately does not define a cross-format
-canonicalization algorithm. A profile MAY define one. A descriptor MUST say
-what artifact its digest covers when this is otherwise ambiguous.
+Core descriptors do not contain a digest of their own serialized bytes. A
+catalog, manifest, or publication record MAY identify a descriptor with the
+SHA-256 digest of its exact published bytes. That external record MUST also make
+the serialization or media type clear. Core deliberately defines no cross-YAML/
+JSON canonicalization algorithm.
+
+An `artifact.digest` hashes the exact bytes of the resource named by
+`artifact.ref`. If the reference contains a URI fragment, the digest still
+hashes the complete resource bytes with the fragment removed; the fragment is
+applied only after digest verification to select a subresource. A `definition`
+digest has the same exact-byte meaning and is valid only with `definition.ref`.
+ProcessorImplementation descriptors MUST digest their executable artifact.
+Representation artifacts support the same mechanism. Receipts MAY digest exact
+input and output value bytes. SHA-256 is the only Core v0 algorithm.
 
 ## 7. Namespaces and resolution
 
@@ -198,8 +206,8 @@ A Contract descriptor MUST contain:
 - `version`; and
 - a normative `definition` body or reference.
 
-It SHOULD contain a digest and description. It MAY list Representation
-Bindings, dependencies, relationships, and conformance material.
+It SHOULD contain a description. It MAY list Representation Bindings,
+dependencies, relationships, and conformance material.
 
 The `version` field MUST equal the version token in `address`. All versions of
 one Contract Family MUST retain the same `namespace_id` and `family_id`, while
@@ -220,9 +228,10 @@ binding descriptor MUST identify:
 - immutable binding identity; and
 - a representation descriptor, schema, or artifact.
 
-It SHOULD identify media type, syntax version, and digest. The binding version
-belongs to the Contract-to-representation binding. `YAML@1` means "the first
-YAML binding for this Contract," not "YAML specification version 1."
+It SHOULD identify media type and syntax version. A referenced representation
+artifact SHOULD carry its exact-byte digest. The binding version belongs to the
+Contract-to-representation binding. `YAML@1` means "the first YAML binding for
+this Contract," not "YAML specification version 1."
 
 Bindings MAY reference JSON Schema, XML Schema, RDF/SHACL, Protobuf, OpenAPI,
 AsyncAPI, WIT, ODCS, PDPP schemas, UNTP models, or other standards. SPEC MUST
@@ -265,7 +274,7 @@ least one of the two lists MUST be non-empty. Each port references a semantic
 Contract and MAY constrain accepted Representation Bindings.
 
 ```yaml
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Processor
 address: ACME:NORMALIZE@1
 inputs:
@@ -273,7 +282,7 @@ inputs:
     contract: ACME:RAW-INVOICE@1
 outputs:
   - name: invoice
-    contract: COMMON:INVOICE@1
+    contract: SPECX:INVOICE@1
 ```
 
 For SPEC purposes, the declaration is one atomic processing unit. "Atomic"
@@ -367,8 +376,8 @@ A Receipt records one execution or a composed execution without depending on a
 runtime. It MUST identify the receipt and subject and MUST record input and
 output semantic identities. It SHOULD include:
 
-- Processor address, version identity, and digest;
-- implementation identity and digest when one was used;
+- Processor address and version identity;
+- implementation identity and executable artifact digest when one was used;
 - input and output Contract identities, bindings, and artifact digests;
 - start and end timestamps;
 - execution status;
@@ -401,7 +410,7 @@ these conformance classes:
 Implementations SHOULD advertise version and capabilities, for example:
 
 ```yaml
-spec: "0.1"
+spec: "0.1-alpha"
 capabilities:
   core: true
   resolution: true
@@ -443,7 +452,7 @@ Implementations MUST account for:
 - stale resources and revoked trust;
 - forged, replayed, or selectively incomplete Receipts;
 - undeclared or unsafe side effects;
-- digest confusion and canonicalization mismatch; and
+- digest target confusion and canonicalization mismatch; and
 - denial of service through resolution graphs, schemas, or execution.
 
 Resolvers SHOULD pin immutable IDs and digests, impose traversal and size
@@ -492,8 +501,8 @@ version, and digest into Receipts. It does not redefine PDPP consent, grants,
 servers, authentication, collection, or connector runtime behavior.
 
 The v0 stress test has independent Amazon and DoorDash source Contracts, both
-normalizing to `COMMON:PURCHASE@1`, followed by
-`COMMON:PURCHASE@1 -> COMMON:SPEND-EVENT@1`. A Shop source proves that adding a
+normalizing to `SPECX:PURCHASE@1`, followed by
+`SPECX:PURCHASE@1 -> SPECX:SPEND-EVENT@1`. A Shop source proves that adding a
 source requires one new source-to-Purchase Processor and no downstream change.
 
 ### 20.2 Kalo
@@ -529,4 +538,3 @@ Bindings, SHA-256 digest verification, and descriptor parsing.
 The first useful processing implementation additionally supports Processor
 descriptors, inputs and outputs, State Ports, effects, compatibility checking,
 linear and DAG composition, transitive route discovery, and Receipts.
-

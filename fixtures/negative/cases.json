@@ -1,0 +1,38 @@
+[
+  {
+    "id": "same-structure-wrong-contract",
+    "invariant": "Structural compatibility does not imply semantic compatibility."
+  },
+  {
+    "id": "missing-required-binding",
+    "invariant": "A referenced Representation Binding must resolve."
+  },
+  {
+    "id": "incompatible-processor-edge",
+    "invariant": "A Processor output must match the next input nominally."
+  },
+  {
+    "id": "unknown-required-extension",
+    "invariant": "Unknown required extensions fail explicitly."
+  },
+  {
+    "id": "unresolved-processor-implementation",
+    "invariant": "A ProcessorImplementation must resolve its Processor version."
+  },
+  {
+    "id": "unsupported-required-state",
+    "invariant": "A stateless host must reject required State Ports."
+  },
+  {
+    "id": "malformed-receipt-chain",
+    "invariant": "Adjacent Receipt output and input digests must link."
+  },
+  {
+    "id": "mutated-immutable-contract-version",
+    "invariant": "One immutable Contract address cannot resolve to mutated content."
+  },
+  {
+    "id": "ambiguous-namespace-identity",
+    "invariant": "One namespace alias cannot silently select between identities."
+  }
+]

@@ -1,12 +1,11 @@
 $schema: ../../../schemas/v0/contract.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Contract
-address: COMMON:PURCHASE@1
-namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
-family_id: f7e4282f-c944-4511-8f4d-64c26b6c3cc5
-version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+address: SPECX:PURCHASE@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: fe2479b0-264d-4c72-b236-02b6f43935f1
+version_id: cf44e72f-08af-4c7b-a732-68c8078352d4
 version: "1"
-digest: sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 description: A normalized completed or pending purchase from any declared source.
 definition:
   body: >-
@@ -15,5 +14,5 @@ definition:
     identifies the originating record without importing source-specific fields
     into downstream processing.
 bindings:
-  - COMMON:PURCHASE@1:JSON@1
+  - SPECX:PURCHASE@1:JSON@1
 

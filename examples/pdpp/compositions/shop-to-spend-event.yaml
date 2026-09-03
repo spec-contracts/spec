@@ -1,22 +1,19 @@
 $schema: ../../../schemas/v0/composition.schema.json
-spec: "0.1"
+spec: "0.1-alpha"
 kind: Composition
-address: PDPP:SHOP-SPEND-ROUTE@1
-namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
-family_id: bbfa52c9-8562-440c-a673-6c3ae2c5e7d2
-version_id: 3155ef2b-af4e-4386-b6b5-eb54a2f6f068
+address: SPECX:PDPP-SHOP-SPEND-ROUTE@1
+namespace_id: 42acea42-ed1b-4455-86b1-84ca5cbfc7d2
+family_id: c6d613e8-36a5-4542-a9bb-d885b73460f1
+version_id: 06475e9b-f9a9-4a02-8b1c-53d920e0cdb6
 version: "1"
-digest: sha256:cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd
 description: The third-source route reusing the unchanged downstream Processor.
 nodes:
   - id: normalize
-    processor: PDPP:SHOP-TO-PURCHASE@1
-    processor_version_id: 38534b4a-a5ee-4418-812c-39bf71dd034d
-    processor_digest: sha256:8888888888888888888888888888888888888888888888888888888888888888
+    processor: SPECX:PDPP-SHOP-TO-PURCHASE@1
+    processor_version_id: 3a5d0fea-33ee-4a96-a1d2-13b7b440d439
   - id: derive_spend
-    processor: COMMON:PURCHASE-TO-SPEND-EVENT@1
-    processor_version_id: e635ce68-e526-45b1-9095-6814f531ab41
-    processor_digest: sha256:9999999999999999999999999999999999999999999999999999999999999999
+    processor: SPECX:PURCHASE-TO-SPEND-EVENT@1
+    processor_version_id: 6aa8921c-aa87-45bb-afaf-4fbc39d30ab4
 edges:
   - from:
       node: normalize
@@ -24,24 +21,24 @@ edges:
     to:
       node: derive_spend
       port: purchase
-    contract: COMMON:PURCHASE@1
-    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
-    binding: COMMON:PURCHASE@1:JSON@1
-    binding_version_id: b3cf27b8-6b86-463e-a28b-1910594b6e81
+    contract: SPECX:PURCHASE@1
+    contract_version_id: cf44e72f-08af-4c7b-a732-68c8078352d4
+    binding: SPECX:PURCHASE@1:JSON@1
+    binding_version_id: f87a0886-d589-451c-89b2-4af3069bacb0
 inputs:
   - name: order
     to:
       node: normalize
       port: order
-    contract: PDPP:SHOP-ORDERS@1
-    contract_version_id: 3e5779ca-836d-4064-941a-b3682edd3441
-    binding: PDPP:SHOP-ORDERS@1:JSON@1
+    contract: SPECX:PDPP-SHOP-ORDERS@1
+    contract_version_id: 63ee33bd-eb06-4aca-b09e-65cacdba0d46
+    binding: SPECX:PDPP-SHOP-ORDERS@1:JSON@1
 outputs:
   - name: spend_event
     from:
       node: derive_spend
       port: spend_event
-    contract: COMMON:SPEND-EVENT@1
-    contract_version_id: e93d2901-62b4-416c-8280-bf52225242f2
-    binding: COMMON:SPEND-EVENT@1:JSON@1
+    contract: SPECX:SPEND-EVENT@1
+    contract_version_id: 7d21db84-7b15-4e41-a761-6bae2b3808f9
+    binding: SPECX:SPEND-EVENT@1:JSON@1
 
