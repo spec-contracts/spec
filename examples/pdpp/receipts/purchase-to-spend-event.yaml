@@ -1,0 +1,29 @@
+$schema: ../../../schemas/v0/receipt.schema.json
+spec: "0.1"
+kind: Receipt
+receipt_id: 7c6c4e0a-9e54-4ef5-b3c0-8ef941c33b5b
+execution_id: 27fec6e4-8ad8-43bd-8347-db29678c5820
+subject:
+  processor: COMMON:PURCHASE-TO-SPEND-EVENT@1
+  processor_version_id: e635ce68-e526-45b1-9095-6814f531ab41
+  processor_digest: sha256:9999999999999999999999999999999999999999999999999999999999999999
+status: succeeded
+started_at: "2026-09-03T10:00:00.041Z"
+ended_at: "2026-09-03T10:00:00.052Z"
+inputs:
+  - port: purchase
+    contract: COMMON:PURCHASE@1
+    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    binding: COMMON:PURCHASE@1:JSON@1
+    binding_version_id: b3cf27b8-6b86-463e-a28b-1910594b6e81
+    artifact_digest: sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+outputs:
+  - port: spend_event
+    contract: COMMON:SPEND-EVENT@1
+    contract_version_id: e93d2901-62b4-416c-8280-bf52225242f2
+    binding: COMMON:SPEND-EVENT@1:JSON@1
+    binding_version_id: 44957a1b-f0df-423c-b723-709daae1d389
+    artifact_digest: sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210
+parent_receipts:
+  - cbf6ee8e-cb7f-4fb8-b53b-f6d4fbb5eecd
+

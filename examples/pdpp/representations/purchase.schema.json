@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "COMMON:PURCHASE@1 JSON binding",
+  "type": "object",
+  "required": ["purchase_id", "purchased_at", "status", "currency", "total_minor", "source_ref"],
+  "properties": {
+    "purchase_id": {"type": "string", "format": "uuid"},
+    "purchased_at": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["pending", "completed", "cancelled", "refunded", "unknown"]},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "total_minor": {"type": "integer", "minimum": 0},
+    "merchant": {"type": "string"},
+    "source_ref": {
+      "type": "object",
+      "required": ["system", "record_id"],
+      "properties": {
+        "system": {"type": "string", "minLength": 1},
+        "record_id": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+

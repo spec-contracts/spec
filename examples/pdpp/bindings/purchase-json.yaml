@@ -1,0 +1,22 @@
+$schema: ../../../schemas/v0/representation-binding.schema.json
+spec: "0.1"
+kind: RepresentationBinding
+address: COMMON:PURCHASE@1:JSON@1
+parent: COMMON:PURCHASE@1
+namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
+family_id: f7e4282f-c944-4511-8f4d-64c26b6c3cc5
+version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+binding_id: 64097762-47eb-4237-a3b6-7c620eeb7588
+binding_version_id: b3cf27b8-6b86-463e-a28b-1910594b6e81
+binding: JSON
+binding_version: "1"
+media_type: application/json
+syntax_version: JSON Schema 2020-12
+digest: sha256:4444444444444444444444444444444444444444444444444444444444444444
+representation:
+  standard: JSON Schema 2020-12
+  artifact:
+    ref: ../representations/purchase.schema.json
+    media_type: application/schema+json
+    digest: sha256:4444444444444444444444444444444444444444444444444444444444444444
+

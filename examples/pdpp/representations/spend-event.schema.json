@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "COMMON:SPEND-EVENT@1 JSON binding",
+  "type": "object",
+  "required": ["event_id", "occurred_at", "amount", "source_ref"],
+  "properties": {
+    "event_id": {"type": "string", "format": "uuid"},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "amount": {
+      "type": "object",
+      "required": ["currency", "minor"],
+      "properties": {
+        "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+        "minor": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "merchant": {"type": "string"},
+    "source_ref": {
+      "type": "object",
+      "required": ["system", "record_id"],
+      "properties": {
+        "system": {"type": "string", "minLength": 1},
+        "record_id": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+

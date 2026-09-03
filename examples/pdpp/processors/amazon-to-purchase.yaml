@@ -1,0 +1,33 @@
+$schema: ../../../schemas/v0/processor.schema.json
+spec: "0.1"
+kind: Processor
+address: PDPP:AMAZON-TO-PURCHASE@1
+namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
+family_id: 6e29d28e-69ab-4e08-ab57-b864fd35f8fd
+version_id: de82f1d1-188f-4976-90d1-f0b7d19a15fe
+version: "1"
+digest: sha256:6666666666666666666666666666666666666666666666666666666666666666
+description: Normalize one synthetic Amazon order into a shared Purchase.
+definition:
+  body: >-
+    Map Amazon order identity, purchase time, status, currency, total, merchant,
+    and source reference into COMMON:PURCHASE@1. Convert decimal total to exact
+    integer minor units according to the declared currency.
+inputs:
+  - name: order
+    contract: PDPP:AMAZON-ORDERS@1
+    contract_version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
+    bindings:
+      - PDPP:AMAZON-ORDERS@1:JSON@1
+outputs:
+  - name: purchase
+    contract: COMMON:PURCHASE@1
+    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    bindings:
+      - COMMON:PURCHASE@1:JSON@1
+state: []
+effects:
+  safe: true
+  idempotent: true
+  open_world: false
+

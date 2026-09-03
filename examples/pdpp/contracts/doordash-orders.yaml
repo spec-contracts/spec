@@ -1,0 +1,18 @@
+$schema: ../../../schemas/v0/contract.schema.json
+spec: "0.1"
+kind: Contract
+address: PDPP:DOORDASH-ORDERS@1
+namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
+family_id: 947299bc-a640-4659-8e35-b511f77aae7f
+version_id: a0f09907-4113-44c4-8cf9-e855d646c03c
+version: "1"
+digest: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+description: A synthetic DoorDash order delivered by the doordash.orders source.
+definition:
+  body: >-
+    One order as supplied by the PDP-Connect synthetic doordash.orders source.
+    Fees, tips, merchant data, and status retain DoorDash source semantics until
+    an explicit normalization Processor produces a shared Contract.
+bindings:
+  - PDPP:DOORDASH-ORDERS@1:JSON@1
+

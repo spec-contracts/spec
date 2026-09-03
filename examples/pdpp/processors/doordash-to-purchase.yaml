@@ -1,0 +1,33 @@
+$schema: ../../../schemas/v0/processor.schema.json
+spec: "0.1"
+kind: Processor
+address: PDPP:DOORDASH-TO-PURCHASE@1
+namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
+family_id: 94cebe39-bf21-4873-92b8-d3e28a7485da
+version_id: 9d82e7b2-3036-471a-a16c-0ef4204d7684
+version: "1"
+digest: sha256:7777777777777777777777777777777777777777777777777777777777777777
+description: Normalize one synthetic DoorDash order into a shared Purchase.
+definition:
+  body: >-
+    Map DoorDash order identity, creation time, status, currency, total,
+    merchant, and source reference into COMMON:PURCHASE@1. Convert decimal
+    total to exact integer minor units according to the declared currency.
+inputs:
+  - name: order
+    contract: PDPP:DOORDASH-ORDERS@1
+    contract_version_id: a0f09907-4113-44c4-8cf9-e855d646c03c
+    bindings:
+      - PDPP:DOORDASH-ORDERS@1:JSON@1
+outputs:
+  - name: purchase
+    contract: COMMON:PURCHASE@1
+    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    bindings:
+      - COMMON:PURCHASE@1:JSON@1
+state: []
+effects:
+  safe: true
+  idempotent: true
+  open_world: false
+

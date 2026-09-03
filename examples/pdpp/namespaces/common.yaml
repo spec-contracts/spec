@@ -1,0 +1,13 @@
+$schema: ../../../schemas/v0/namespace.schema.json
+spec: "0.1"
+kind: Namespace
+alias: COMMON
+namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
+description: Shared semantic contracts used by the v0 commerce experiment.
+authority:
+  name: SPEC v0 example authority
+resolver_hints:
+  - mechanism: filesystem
+    ref: ../
+    priority: 0
+

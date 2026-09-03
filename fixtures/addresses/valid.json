@@ -1,0 +1,42 @@
+[
+  {
+    "address": "KA:MO@1",
+    "form": "resource",
+    "namespace": "KA",
+    "name": "MO",
+    "version": "1"
+  },
+  {
+    "address": "ACME:NORMALIZE-INVOICE@1.0.0",
+    "form": "resource",
+    "namespace": "ACME",
+    "name": "NORMALIZE-INVOICE",
+    "version": "1.0.0"
+  },
+  {
+    "address": "COMMON:PURCHASE@2026-09-draft",
+    "form": "resource",
+    "namespace": "COMMON",
+    "name": "PURCHASE",
+    "version": "2026-09-draft"
+  },
+  {
+    "address": "KA:MO@1:YAML@1",
+    "form": "binding",
+    "namespace": "KA",
+    "name": "MO",
+    "version": "1",
+    "binding": "YAML",
+    "binding_version": "1"
+  },
+  {
+    "address": "PDPP:AMAZON-ORDERS@1:JSON@1.1",
+    "form": "binding",
+    "namespace": "PDPP",
+    "name": "AMAZON-ORDERS",
+    "version": "1",
+    "binding": "JSON",
+    "binding_version": "1.1"
+  }
+]
+

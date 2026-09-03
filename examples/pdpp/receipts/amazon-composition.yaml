@@ -1,0 +1,46 @@
+$schema: ../../../schemas/v0/receipt.schema.json
+spec: "0.1"
+kind: Receipt
+receipt_id: 374253cb-cba0-427d-8d41-cd18445225bc
+execution_id: 0ccf3e00-91a4-47eb-a4ae-7176f8b01c9a
+subject:
+  composition: PDPP:AMAZON-SPEND-ROUTE@1
+  composition_version_id: 6a002ce1-06e5-49e1-8065-c6cf33680b4e
+  composition_digest: sha256:abababababababababababababababababababababababababababababababab
+status: succeeded
+started_at: "2026-09-03T10:00:00Z"
+ended_at: "2026-09-03T10:00:00.052Z"
+inputs:
+  - port: order
+    contract: PDPP:AMAZON-ORDERS@1
+    contract_version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
+    binding: PDPP:AMAZON-ORDERS@1:JSON@1
+    binding_version_id: 0c48ea06-f4c8-47af-aa1f-00c59ebf6375
+    artifact_digest: sha256:abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd
+    source:
+      system: PDP-Connect
+      resource: amazon.orders
+      version: synthetic-v1
+      digest: sha256:abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd
+outputs:
+  - port: spend_event
+    contract: COMMON:SPEND-EVENT@1
+    contract_version_id: e93d2901-62b4-416c-8280-bf52225242f2
+    binding: COMMON:SPEND-EVENT@1:JSON@1
+    binding_version_id: 44957a1b-f0df-423c-b723-709daae1d389
+    artifact_digest: sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210
+route:
+  - node: normalize
+    processor: PDPP:AMAZON-TO-PURCHASE@1
+    processor_version_id: de82f1d1-188f-4976-90d1-f0b7d19a15fe
+    processor_digest: sha256:6666666666666666666666666666666666666666666666666666666666666666
+    receipt_id: cbf6ee8e-cb7f-4fb8-b53b-f6d4fbb5eecd
+  - node: derive_spend
+    processor: COMMON:PURCHASE-TO-SPEND-EVENT@1
+    processor_version_id: e635ce68-e526-45b1-9095-6814f531ab41
+    processor_digest: sha256:9999999999999999999999999999999999999999999999999999999999999999
+    receipt_id: 7c6c4e0a-9e54-4ef5-b3c0-8ef941c33b5b
+parent_receipts:
+  - cbf6ee8e-cb7f-4fb8-b53b-f6d4fbb5eecd
+  - 7c6c4e0a-9e54-4ef5-b3c0-8ef941c33b5b
+

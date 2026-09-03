@@ -1,0 +1,16 @@
+[
+  {"address": "ka:MO@1", "reason": "namespace is not uppercase"},
+  {"address": "KA:mo@1", "reason": "name is not uppercase"},
+  {"address": "KA:MO1", "reason": "version delimiter is missing"},
+  {"address": "KA:MO@", "reason": "version is empty"},
+  {"address": "KA:MO@v1", "reason": "version does not begin with a digit"},
+  {"address": "KA:MY_NAME@1", "reason": "underscore is not valid in a name"},
+  {"address": "KA:MO@1:YAML", "reason": "binding version is missing"},
+  {"address": "KA:MO@1:YAML@v1", "reason": "binding version does not begin with a digit"},
+  {"address": "KA:MO@1:YAML@1:EXTRA@1", "reason": "address has extra components"},
+  {"address": " KA:MO@1", "reason": "whitespace is significant and invalid"},
+  {"address": "KA:MO@1 ", "reason": "whitespace is significant and invalid"},
+  {"address": "https://example.test/KA:MO@1", "reason": "URL syntax is not address syntax"},
+  {"address": "KA:MO%401", "reason": "percent encoding is not interpreted"}
+]
+

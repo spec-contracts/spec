@@ -1,0 +1,47 @@
+$schema: ../../../schemas/v0/composition.schema.json
+spec: "0.1"
+kind: Composition
+address: PDPP:AMAZON-SPEND-ROUTE@1
+namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
+family_id: fb8fd24b-9f87-445f-9cef-3a32143cb612
+version_id: 6a002ce1-06e5-49e1-8065-c6cf33680b4e
+version: "1"
+digest: sha256:abababababababababababababababababababababababababababababababab
+description: A mechanically derivable Amazon order to SpendEvent route.
+nodes:
+  - id: normalize
+    processor: PDPP:AMAZON-TO-PURCHASE@1
+    processor_version_id: de82f1d1-188f-4976-90d1-f0b7d19a15fe
+    processor_digest: sha256:6666666666666666666666666666666666666666666666666666666666666666
+  - id: derive_spend
+    processor: COMMON:PURCHASE-TO-SPEND-EVENT@1
+    processor_version_id: e635ce68-e526-45b1-9095-6814f531ab41
+    processor_digest: sha256:9999999999999999999999999999999999999999999999999999999999999999
+edges:
+  - from:
+      node: normalize
+      port: purchase
+    to:
+      node: derive_spend
+      port: purchase
+    contract: COMMON:PURCHASE@1
+    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    binding: COMMON:PURCHASE@1:JSON@1
+    binding_version_id: b3cf27b8-6b86-463e-a28b-1910594b6e81
+inputs:
+  - name: order
+    to:
+      node: normalize
+      port: order
+    contract: PDPP:AMAZON-ORDERS@1
+    contract_version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
+    binding: PDPP:AMAZON-ORDERS@1:JSON@1
+outputs:
+  - name: spend_event
+    from:
+      node: derive_spend
+      port: spend_event
+    contract: COMMON:SPEND-EVENT@1
+    contract_version_id: e93d2901-62b4-416c-8280-bf52225242f2
+    binding: COMMON:SPEND-EVENT@1:JSON@1
+

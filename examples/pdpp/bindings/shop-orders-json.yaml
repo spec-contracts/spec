@@ -1,0 +1,22 @@
+$schema: ../../../schemas/v0/representation-binding.schema.json
+spec: "0.1"
+kind: RepresentationBinding
+address: PDPP:SHOP-ORDERS@1:JSON@1
+parent: PDPP:SHOP-ORDERS@1
+namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
+family_id: df3c7d52-72f1-4660-aa77-f08703078f20
+version_id: 3e5779ca-836d-4064-941a-b3682edd3441
+binding_id: e516e17b-d7f0-42ab-8800-62357a9b0104
+binding_version_id: bec694c4-dedc-4119-9efa-245324f3fa3d
+binding: JSON
+binding_version: "1"
+media_type: application/json
+syntax_version: JSON Schema 2020-12
+digest: sha256:3333333333333333333333333333333333333333333333333333333333333333
+representation:
+  standard: JSON Schema 2020-12
+  artifact:
+    ref: ../representations/shop-orders.schema.json
+    media_type: application/schema+json
+    digest: sha256:3333333333333333333333333333333333333333333333333333333333333333
+

@@ -1,0 +1,33 @@
+$schema: ../../../schemas/v0/processor.schema.json
+spec: "0.1"
+kind: Processor
+address: COMMON:PURCHASE-TO-SPEND-EVENT@1
+namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
+family_id: 2e7e5d5a-e37e-46b0-9e1c-72a93b594d01
+version_id: e635ce68-e526-45b1-9095-6814f531ab41
+version: "1"
+digest: sha256:9999999999999999999999999999999999999999999999999999999999999999
+description: Derive one SpendEvent from one shared Purchase.
+definition:
+  body: >-
+    Copy occurrence time, normalized amount, optional merchant, and source
+    reference from COMMON:PURCHASE@1 into COMMON:SPEND-EVENT@1. This boundary
+    has no knowledge of Amazon, DoorDash, Shop, or any source representation.
+inputs:
+  - name: purchase
+    contract: COMMON:PURCHASE@1
+    contract_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    bindings:
+      - COMMON:PURCHASE@1:JSON@1
+outputs:
+  - name: spend_event
+    contract: COMMON:SPEND-EVENT@1
+    contract_version_id: e93d2901-62b4-416c-8280-bf52225242f2
+    bindings:
+      - COMMON:SPEND-EVENT@1:JSON@1
+state: []
+effects:
+  safe: true
+  idempotent: true
+  open_world: false
+

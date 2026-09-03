@@ -1,0 +1,22 @@
+$schema: ../../../schemas/v0/representation-binding.schema.json
+spec: "0.1"
+kind: RepresentationBinding
+address: COMMON:SPEND-EVENT@1:JSON@1
+parent: COMMON:SPEND-EVENT@1
+namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
+family_id: fc6e0632-7821-4042-a938-2c0e0dedc5f7
+version_id: e93d2901-62b4-416c-8280-bf52225242f2
+binding_id: 7a3fa390-644e-4de4-ab07-e92056ea5be8
+binding_version_id: 44957a1b-f0df-423c-b723-709daae1d389
+binding: JSON
+binding_version: "1"
+media_type: application/json
+syntax_version: JSON Schema 2020-12
+digest: sha256:5555555555555555555555555555555555555555555555555555555555555555
+representation:
+  standard: JSON Schema 2020-12
+  artifact:
+    ref: ../representations/spend-event.schema.json
+    media_type: application/schema+json
+    digest: sha256:5555555555555555555555555555555555555555555555555555555555555555
+

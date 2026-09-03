@@ -1,0 +1,23 @@
+$schema: ../../../schemas/v0/contract.schema.json
+spec: "0.1"
+kind: Contract
+address: COMMON:SPEND-EVENT@1
+namespace_id: a108fd92-2670-4445-9d23-9cf2a14af162
+family_id: fc6e0632-7821-4042-a938-2c0e0dedc5f7
+version_id: e93d2901-62b4-416c-8280-bf52225242f2
+version: "1"
+digest: sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+description: A normalized event representing consumer spending.
+definition:
+  body: >-
+    A spend event records an amount spent at an occurrence time and retains a
+    source reference suitable for provenance. It is derived only from the
+    COMMON:PURCHASE semantic boundary, not from source-specific order shapes.
+bindings:
+  - COMMON:SPEND-EVENT@1:JSON@1
+relationships:
+  - relation: derived-from
+    target: COMMON:PURCHASE@1
+    target_version_id: 40a65782-cbff-4ea3-8a86-195b1a811021
+    description: Produced by an explicit Purchase-to-SpendEvent Processor.
+

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic shop.orders record",
+  "type": "object",
+  "required": ["id", "processed_at", "currency", "total_price"],
+  "properties": {
+    "id": {"type": "integer", "minimum": 1},
+    "processed_at": {"type": "string", "format": "date-time"},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "total_price": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]{1,2})?$"},
+    "shop_name": {"type": "string"},
+    "line_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "quantity"],
+        "properties": {
+          "name": {"type": "string"},
+          "quantity": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
+

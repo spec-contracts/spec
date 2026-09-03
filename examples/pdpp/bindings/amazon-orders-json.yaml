@@ -1,0 +1,22 @@
+$schema: ../../../schemas/v0/representation-binding.schema.json
+spec: "0.1"
+kind: RepresentationBinding
+address: PDPP:AMAZON-ORDERS@1:JSON@1
+parent: PDPP:AMAZON-ORDERS@1
+namespace_id: 8cfcfab8-cbcf-4f46-ad3e-42b4a05e7ab0
+family_id: a948ebf4-58e2-4337-9baa-12f69b149177
+version_id: ef3e8c86-9886-4d3a-b559-790a6b63abd8
+binding_id: 3e93e699-8106-4c43-a9e7-a0385524e189
+binding_version_id: 0c48ea06-f4c8-47af-aa1f-00c59ebf6375
+binding: JSON
+binding_version: "1"
+media_type: application/json
+syntax_version: JSON Schema 2020-12
+digest: sha256:1111111111111111111111111111111111111111111111111111111111111111
+representation:
+  standard: JSON Schema 2020-12
+  artifact:
+    ref: ../representations/amazon-orders.schema.json
+    media_type: application/schema+json
+    digest: sha256:1111111111111111111111111111111111111111111111111111111111111111
+
