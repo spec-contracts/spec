@@ -61,6 +61,50 @@ class ConformanceSuiteTests(unittest.TestCase):
         with self.assertRaisesRegex(conformance.ConformanceFailure, "coverage mismatch"):
             conformance.verify_report(report, self.suite)
 
+    def test_normative_requirements_are_fully_accounted(self) -> None:
+        catalog = conformance.audit_requirements(self.suite)
+        self.assertEqual(41, catalog["summary"]["total"])
+        self.assertEqual(43, catalog["source"]["normative_keyword_occurrences"])
+
+    def test_requirements_reject_unknown_suite_test(self) -> None:
+        catalog = conformance.load_json(conformance.REQUIREMENTS_PATH)
+        catalog["requirements"][0]["test_ids"] = ["CV-NOT-REAL"]
+        original = conformance.load_json
+        try:
+            conformance.load_json = lambda path: (
+                catalog if path == conformance.REQUIREMENTS_PATH else original(path)
+            )
+            with self.assertRaisesRegex(conformance.ConformanceFailure, "unknown test IDs"):
+                conformance.load_requirements(self.suite)
+        finally:
+            conformance.load_json = original
+
+    def test_requirements_reject_incorrect_summary(self) -> None:
+        catalog = conformance.load_json(conformance.REQUIREMENTS_PATH)
+        catalog["summary"]["tested"] += 1
+        original = conformance.load_json
+        try:
+            conformance.load_json = lambda path: (
+                catalog if path == conformance.REQUIREMENTS_PATH else original(path)
+            )
+            with self.assertRaisesRegex(conformance.ConformanceFailure, "summary"):
+                conformance.load_requirements(self.suite)
+        finally:
+            conformance.load_json = original
+
+    def test_requirements_reject_unaccounted_normative_occurrence(self) -> None:
+        catalog = conformance.load_json(conformance.REQUIREMENTS_PATH)
+        catalog["requirements"].pop()
+        original = conformance.load_json
+        try:
+            conformance.load_json = lambda path: (
+                catalog if path == conformance.REQUIREMENTS_PATH else original(path)
+            )
+            with self.assertRaisesRegex(conformance.ConformanceFailure, "coverage mismatch"):
+                conformance.load_requirements(self.suite)
+        finally:
+            conformance.load_json = original
+
 
 if __name__ == "__main__":
     unittest.main()

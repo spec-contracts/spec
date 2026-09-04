@@ -1,0 +1,159 @@
+{
+  "schema_version": 3,
+  "event_kind": "task_checkpoint",
+  "checkpoint_id": "cp_20260904T171244Z_c01_completed",
+  "task_id": "spec-c004-requirements-traceability",
+  "target": "C01",
+  "series": "C",
+  "query": "Create SPEC v0.1-alpha normative requirements traceability matrix and omission checker",
+  "slice": "C01",
+  "slice_title": "Inventory atomic MUST requirements and verify coverage",
+  "parent_slice": "C01",
+  "stage": "completed",
+  "decision": "complete",
+  "created_at": "2026-09-04T17:12:44Z",
+  "goal": "Record progress for `Create SPEC v0.1-alpha normative requirements traceability matrix and omission checker`.",
+  "description": "Added a source-pinned normative requirements catalog and generated matrix that accounts for all 43 uppercase MUST/MUST NOT occurrences, excludes two RFC keyword definitions, classifies 41 requirements, maps suite evidence, exposes per-class gaps, and fails CI on omissions or staleness without changing protocol semantics.",
+  "note": "Exercise only: no certification authority or certification decision; v0.1-alpha protocol surface remains frozen.",
+  "resources": [
+    "../C00-index.md",
+    "../C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+    "../C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+    "../task.json"
+  ],
+  "files_read": [
+    "spec.md",
+    "conformance/v0.1-alpha/suite.json",
+    "tools/conformance.py"
+  ],
+  "files_edited": [
+    "conformance/v0.1-alpha/requirements.json",
+    "conformance/v0.1-alpha/requirements.schema.json",
+    "conformance/v0.1-alpha/REQUIREMENTS.md",
+    "tools/conformance.py",
+    "tools/test_conformance.py",
+    ".github/workflows/validate.yml",
+    "README.md",
+    "conformance/v0.1-alpha/README.md",
+    "devspecs/tasks/spec-c004-requirements-traceability/C00-index.md",
+    "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+    "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+    "devspecs/tasks/spec-c004-requirements-traceability/task.json"
+  ],
+  "tests_read": [
+    "tools/test_conformance.py"
+  ],
+  "tests_run": [
+    "python tools/validate.py",
+    "python tools/test_conformance.py",
+    "python tools/conformance.py run --output \u003ctemp-report\u003e",
+    "python tools/conformance.py verify-report \u003ctemp-report\u003e",
+    "python tools/conformance.py audit-requirements"
+  ],
+  "missed_files": [
+    "spec.md",
+    "conformance/v0.1-alpha/suite.json",
+    "conformance/v0.1-alpha/requirements.json",
+    "conformance/v0.1-alpha/requirements.schema.json",
+    "conformance/v0.1-alpha/REQUIREMENTS.md"
+  ],
+  "actual_context": {
+    "files_read": [
+      "spec.md",
+      "conformance/v0.1-alpha/suite.json",
+      "tools/conformance.py"
+    ],
+    "files_edited": [
+      "conformance/v0.1-alpha/requirements.json",
+      "conformance/v0.1-alpha/requirements.schema.json",
+      "conformance/v0.1-alpha/REQUIREMENTS.md",
+      "tools/conformance.py",
+      "tools/test_conformance.py",
+      ".github/workflows/validate.yml",
+      "README.md",
+      "conformance/v0.1-alpha/README.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/C00-index.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/task.json"
+    ],
+    "tests_read": [
+      "tools/test_conformance.py"
+    ],
+    "tests_run": [
+      "python tools/validate.py",
+      "python tools/test_conformance.py",
+      "python tools/conformance.py run --output \u003ctemp-report\u003e",
+      "python tools/conformance.py verify-report \u003ctemp-report\u003e",
+      "python tools/conformance.py audit-requirements"
+    ]
+  },
+  "predicted_context_feedback": {
+    "relevant_found": [
+      "tools/conformance.py",
+      "tools/test_conformance.py"
+    ],
+    "critical_missed": [
+      "spec.md",
+      "conformance/v0.1-alpha/suite.json",
+      "conformance/v0.1-alpha/requirements.json",
+      "conformance/v0.1-alpha/requirements.schema.json",
+      "conformance/v0.1-alpha/REQUIREMENTS.md"
+    ]
+  },
+  "evidence": {
+    "git_diff": {
+      "command": "git status --short --untracked-files=all; git diff --stat; git diff --name-only; git diff --cached --name-only; git ls-files --others --exclude-standard",
+      "status": " M .github/workflows/validate.yml\n M README.md\n M conformance/v0.1-alpha/README.md\n M tools/conformance.py\n M tools/test_conformance.py\n?? conformance/v0.1-alpha/REQUIREMENTS.md\n?? conformance/v0.1-alpha/requirements.json\n?? conformance/v0.1-alpha/requirements.schema.json\n?? devspecs/tasks/spec-c004-requirements-traceability/C00-index.md\n?? devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-plan.md\n?? devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-result.md\n?? devspecs/tasks/spec-c004-requirements-traceability/task.json\n",
+      "stat": " .github/workflows/validate.yml   |   1 +\n README.md                        |   7 ++\n conformance/v0.1-alpha/README.md |  15 +++\n tools/conformance.py             | 199 +++++++++++++++++++++++++++++++++++++++\n tools/test_conformance.py        |  44 +++++++++\n 5 files changed, 266 insertions(+)\n",
+      "changed_files": [
+        ".github/workflows/validate.yml",
+        "README.md",
+        "conformance/v0.1-alpha/README.md",
+        "tools/conformance.py",
+        "tools/test_conformance.py",
+        "conformance/v0.1-alpha/REQUIREMENTS.md",
+        "conformance/v0.1-alpha/requirements.json",
+        "conformance/v0.1-alpha/requirements.schema.json",
+        "devspecs/tasks/spec-c004-requirements-traceability/C00-index.md",
+        "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+        "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+        "devspecs/tasks/spec-c004-requirements-traceability/task.json"
+      ],
+      "max_bytes": 12000,
+      "truncated": false
+    },
+    "git_diff_paths": [
+      ".github/workflows/validate.yml",
+      "README.md",
+      "conformance/v0.1-alpha/README.md",
+      "tools/conformance.py",
+      "tools/test_conformance.py",
+      "conformance/v0.1-alpha/REQUIREMENTS.md",
+      "conformance/v0.1-alpha/requirements.json",
+      "conformance/v0.1-alpha/requirements.schema.json",
+      "devspecs/tasks/spec-c004-requirements-traceability/C00-index.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+      "devspecs/tasks/spec-c004-requirements-traceability/task.json"
+    ],
+    "plan_refs": [
+      "../C00-index.md",
+      "../C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+      "../C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+      "../task.json"
+    ]
+  },
+  "learnings": [
+    {
+      "learning_type": "coverage-gap",
+      "summary": "The 41 normative requirements currently classify as 18 tested, 6 partially tested, 9 inspection-required, and 8 deferred; a 22/22 implementation report therefore is not certification completeness.",
+      "evidence_refs": [
+        "conformance/v0.1-alpha/REQUIREMENTS.md"
+      ],
+      "applies_to": "SPEC certification readiness",
+      "confidence": "high"
+    }
+  ],
+  "next": {}
+}

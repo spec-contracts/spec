@@ -44,6 +44,21 @@ summary counts, evidence presence for passing tests, and the all-required-tests
 rule for every claimed class. It does not establish that cited evidence is
 honest; external review remains necessary.
 
+## Normative requirement traceability
+
+[`REQUIREMENTS.md`](REQUIREMENTS.md) accounts for every uppercase `MUST` and
+`MUST NOT` occurrence in the pinned v0.1-alpha specification and maps each
+normative requirement to current tests, an inspection obligation, or an
+explicit deferred gap. Verify that the source and matrix remain synchronized:
+
+```shell
+python tools/conformance.py audit-requirements
+```
+
+This traceability catalog is an exercise toward certification readiness. Its
+`tested` disposition records current evidence coverage; it does not convert the
+draft suite or a self-assessment report into certification.
+
 ## Coverage
 
 This draft includes claim gates for Core Consumer, Resolver, Representation

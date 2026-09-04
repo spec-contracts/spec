@@ -28,6 +28,7 @@ Executable evidence is maintained separately in
 - [`examples/pdpp/`](examples/pdpp/) — PDP-Connect synthetic commerce stress test
 - [`fixtures/`](fixtures/) — conformance fixtures, beginning with address parsing
 - [`conformance/v0.1-alpha/`](conformance/v0.1-alpha/) — draft self-assessment suite and report format
+- [`conformance/v0.1-alpha/REQUIREMENTS.md`](conformance/v0.1-alpha/REQUIREMENTS.md) — normative requirement-to-evidence matrix
 - [`docs/pdpp-bridge.md`](docs/pdpp-bridge.md) — deliberately narrow PDPP bridge
 - [`docs/kalo-mapping.md`](docs/kalo-mapping.md) — non-normative Kalo mapping
 - [`tools/validate.py`](tools/validate.py) — local schema and fixture validation
@@ -51,6 +52,7 @@ record may separately digest descriptor bytes.
 python tools/validate.py
 python tools/conformance.py run --output conformance-report.json
 python tools/conformance.py verify-report conformance-report.json
+python tools/conformance.py audit-requirements
 ```
 
 The validator uses Python 3 plus `PyYAML` and `jsonschema`. It checks every
@@ -62,6 +64,11 @@ report and enforces all-required-tests gates for claimed capability classes.
 Implementation behavior that the canonical oracle cannot execute is reported
 as `not-run`, never inferred as passing. This is self-assessment tooling, not a
 certification program.
+
+The requirements audit pins the normative source digest, accounts for every
+uppercase `MUST` and `MUST NOT`, validates all referenced test IDs, and rejects
+a stale generated matrix. Deferred and partially tested requirements remain
+visible certification-readiness gaps.
 
 ## License
 

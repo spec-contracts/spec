@@ -1,0 +1,149 @@
+{
+  "task_id": "spec-c004-requirements-traceability",
+  "series": "C",
+  "profile": "code-change",
+  "query": "Create SPEC v0.1-alpha normative requirements traceability matrix and omission checker",
+  "status": "packed",
+  "created_at": "2026-09-04T17:03:31Z",
+  "updated_at": "2026-09-04T17:12:44Z",
+  "repo_root": "C:\\Users\\brenn\\go\\src\\github.com\\spec-contracts\\spec",
+  "workspace": "C:/Users/brenn/go/src/github.com/spec-contracts/spec/devspecs/tasks/spec-c004-requirements-traceability",
+  "artifacts": {
+    "series": "C",
+    "index": "C00-index.md",
+    "first_slice": "C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+    "result": "C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+    "slices": [
+      {
+        "id": "C01",
+        "title": "Inventory atomic MUST requirements and verify coverage",
+        "plan": "C01-inventory-atomic-must-requirements-and-verify-co-plan.md",
+        "result": "C01-inventory-atomic-must-requirements-and-verify-co-result.md",
+        "kind": "slice",
+        "stage": "completed",
+        "decision": "complete",
+        "updated_at": "2026-09-04T17:12:44Z",
+        "latest_checkpoint_id": "cp_20260904T171244Z_c01_completed",
+        "latest_checkpoint": "checkpoints/20260904-171244-completed.md",
+        "latest_checkpoint_json": "checkpoints/20260904-171244-completed.json"
+      }
+    ]
+  },
+  "predicted_context": {
+    "relevant_areas": [
+      "tools",
+      "SPEC.md"
+    ],
+    "primary_files": [
+      {
+        "path": "tools/conformance.py",
+        "title": "tools/conformance.py (python)",
+        "kind": "source_context",
+        "role": "implementation_surface",
+        "evidence": [
+          "pack tier: related (explicit exact plan/track ID reference)",
+          "exact intent ID: explicit body reference",
+          "query term match in body: alpha"
+        ]
+      }
+    ],
+    "tests": [
+      {
+        "path": "tools/test_conformance.py#L17",
+        "title": "test_reference_report_is_valid_and_makes_no_claims",
+        "kind": "source_context",
+        "subtype": "test_case",
+        "role": "behavior_tests",
+        "evidence": [
+          "relationship expansion: test_companion",
+          "pack tier: related (test_companion)"
+        ]
+      }
+    ],
+    "supporting_context": [
+      {
+        "path": "SPEC.md",
+        "title": "SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts",
+        "kind": "spec",
+        "role": "supporting_context",
+        "evidence": [
+          "section-packed context: SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 1. Scope; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 8. Contracts; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 20. Integration boundaries \u003e 20.2 Kalo",
+          "indexed section match: SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 5. Symbolic addressing \u003e 5.1 Grammar lines 96-131; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 8. Contracts lines 193-219",
+          "exact intent ID: direct path/title match",
+          "anchor-first ranking: score 24.000; matches spec, v0.1-alpha, v01alpha; fields path, title, heading, role",
+          "query term match in path: spec"
+        ]
+      }
+    ],
+    "related_git_receipts": [
+      {
+        "sha": "614100f9eb26a2258920bf56f8781db5cb8997d6",
+        "short_sha": "614100f",
+        "committed_at": "2026-09-04",
+        "subject": "test: add draft v0.1-alpha conformance suite",
+        "matched_paths": [
+          "tools/conformance.py",
+          "tools/test_conformance.py"
+        ],
+        "matched_terms": [
+          "v0.1-alpha"
+        ],
+        "signals": [
+          "touched 2 packed path(s)",
+          "matched query anchors",
+          "cross-file change"
+        ]
+      },
+      {
+        "sha": "a6eb431be3e3692e37f44a29e14ae15cfbc4b7a5",
+        "short_sha": "a6eb431",
+        "committed_at": "2026-09-03",
+        "subject": "spec: freeze v0.1-alpha conceptual model",
+        "matched_paths": [
+          "SPEC.md"
+        ],
+        "matched_terms": [
+          "v0.1-alpha",
+          "spec"
+        ],
+        "signals": [
+          "touched 1 packed path(s)",
+          "matched query anchors"
+        ]
+      },
+      {
+        "sha": "344571bdaa5f515a399edb3a13162eafef42b157",
+        "short_sha": "344571b",
+        "committed_at": "2026-09-03",
+        "subject": "Publish SPEC v0.1 descriptor-design baseline",
+        "matched_paths": [
+          "SPEC.md"
+        ],
+        "matched_terms": [
+          "spec"
+        ],
+        "signals": [
+          "touched 1 packed path(s)",
+          "matched query anchors"
+        ]
+      }
+    ]
+  },
+  "confidence": {
+    "primary_file_confidence": "medium",
+    "test_coverage_confidence": "medium",
+    "docs_config_confidence": "low",
+    "git_receipt_confidence": "high",
+    "noise_risk": "low",
+    "pack_completeness": "low",
+    "why": [
+      "found 1 likely primary file(s)",
+      "found 1 likely test file(s)",
+      "found 3 related Git receipt(s)"
+    ],
+    "agent_instruction": "Validate the test and integration surface before editing. Record critical misses and distracting inclusions in the slice result or a task checkpoint."
+  },
+  "durability": {
+    "required": true
+  }
+}

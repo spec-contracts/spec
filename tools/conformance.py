@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -21,6 +23,9 @@ SUITE_DIR = ROOT / "conformance" / "v0.1-alpha"
 SUITE_PATH = SUITE_DIR / "suite.json"
 SUITE_SCHEMA_PATH = SUITE_DIR / "suite.schema.json"
 REPORT_SCHEMA_PATH = SUITE_DIR / "report.schema.json"
+REQUIREMENTS_PATH = SUITE_DIR / "requirements.json"
+REQUIREMENTS_SCHEMA_PATH = SUITE_DIR / "requirements.schema.json"
+REQUIREMENTS_MARKDOWN_PATH = SUITE_DIR / "REQUIREMENTS.md"
 
 
 class ConformanceFailure(Exception):
@@ -93,6 +98,186 @@ def load_suite() -> dict[str, Any]:
                     f"{item['name']}: required test {test_id} does not name the class"
                 )
     return suite
+
+
+def load_requirements(suite: dict[str, Any]) -> dict[str, Any]:
+    catalog = load_json(REQUIREMENTS_PATH)
+    validate_document(catalog, REQUIREMENTS_SCHEMA_PATH)
+
+    source_path = (SUITE_DIR / catalog["source"]["path"]).resolve()
+    if not source_path.is_relative_to(ROOT) or not source_path.is_file():
+        raise ConformanceFailure("requirements source is missing or outside the repository")
+    source_text = source_path.read_text(encoding="utf-8")
+    source_text = source_text.replace("\r\n", "\n").replace("\r", "\n")
+    source_bytes = source_text.encode("utf-8")
+    actual_digest = "sha256:" + hashlib.sha256(source_bytes).hexdigest()
+    if actual_digest != catalog["source"]["sha256"]:
+        raise ConformanceFailure("requirements source digest does not match spec.md")
+
+    keywords = re.findall(r"\bMUST(?: NOT)?\b", source_text)
+    if len(keywords) != catalog["source"]["normative_keyword_occurrences"]:
+        raise ConformanceFailure("normative keyword occurrence count does not match spec.md")
+
+    exclusions = catalog["excluded_occurrences"]
+    requirements = catalog["requirements"]
+    exclusion_occurrences = [item["source_occurrence"] for item in exclusions]
+    requirement_occurrences = [item["source_occurrence"] for item in requirements]
+    if len(exclusion_occurrences) != len(set(exclusion_occurrences)):
+        raise ConformanceFailure("requirements catalog contains duplicate exclusions")
+    if len(requirement_occurrences) != len(set(requirement_occurrences)):
+        raise ConformanceFailure("requirements catalog maps one source occurrence more than once")
+    if requirement_occurrences != sorted(requirement_occurrences):
+        raise ConformanceFailure("requirements must be ordered by source occurrence")
+    if set(exclusion_occurrences) & set(requirement_occurrences):
+        raise ConformanceFailure("a normative occurrence cannot be both mapped and excluded")
+    expected_occurrences = set(range(1, len(keywords) + 1))
+    accounted = set(exclusion_occurrences) | set(requirement_occurrences)
+    if accounted != expected_occurrences:
+        missing = sorted(expected_occurrences - accounted)
+        extra = sorted(accounted - expected_occurrences)
+        raise ConformanceFailure(
+            f"normative occurrence coverage mismatch; missing={missing}, extra={extra}"
+        )
+
+    ids = [item["id"] for item in requirements]
+    if len(ids) != len(set(ids)):
+        raise ConformanceFailure("requirements catalog contains duplicate requirement IDs")
+    for item in [*exclusions, *requirements]:
+        occurrence = item["source_occurrence"]
+        if item["keyword"] != keywords[occurrence - 1]:
+            raise ConformanceFailure(
+                f"source occurrence {occurrence}: keyword does not match spec.md"
+            )
+
+    known_tests = {item["id"] for item in suite["tests"]}
+    for item in requirements:
+        unknown_tests = sorted(set(item["test_ids"]) - known_tests)
+        if unknown_tests:
+            raise ConformanceFailure(f"{item['id']}: unknown test IDs {unknown_tests}")
+        if item["disposition"] == "tested" and not (
+            item["test_ids"] or item["evidence"]
+        ):
+            raise ConformanceFailure(f"{item['id']}: tested requirement has no evidence")
+
+    counts = Counter(item["disposition"] for item in requirements)
+    expected_summary = {
+        "total": len(requirements),
+        "tested": counts["tested"],
+        "partially_tested": counts["partially-tested"],
+        "inspection_required": counts["inspection-required"],
+        "deferred": counts["deferred"],
+    }
+    if catalog["summary"] != expected_summary:
+        raise ConformanceFailure("requirements summary does not match its entries")
+    return catalog
+
+
+def markdown_cell(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ")
+
+
+def render_requirements(catalog: dict[str, Any], suite: dict[str, Any]) -> str:
+    summary = catalog["summary"]
+    lines = [
+        "# SPEC v0.1-alpha normative requirements traceability",
+        "",
+        "Status: exercise; not a certification matrix or certification decision.",
+        "",
+        (
+            f"This catalog accounts for all {catalog['source']['normative_keyword_occurrences']} "
+            "uppercase `MUST`/`MUST NOT` occurrences in the pinned specification. Two "
+            "occurrences define RFC keywords rather than protocol behavior, leaving "
+            f"{summary['total']} normative requirements. A list introduced by one keyword "
+            "is kept as one requirement and its complete list is part of the verification scope."
+        ),
+        "",
+        "Disposition totals:",
+        "",
+        f"- Tested: {summary['tested']}",
+        f"- Partially tested: {summary['partially_tested']}",
+        f"- Inspection required: {summary['inspection_required']}",
+        f"- Deferred coverage gap: {summary['deferred']}",
+        "",
+        "`Tested` means the present draft suite or its verifier has executable evidence. "
+        "`Partially tested` means at least one normative subcondition remains uncovered. "
+        "`Inspection required` defines a human review obligation. `Deferred` is an explicit "
+        "suite gap and cannot support certification yet.",
+        "",
+        "## Class-level readiness",
+        "",
+        "Requirements that apply to multiple classes are counted in every relevant row. "
+        "`All Conformance Classes` requirements are included in every row.",
+        "",
+        "| Class | Suite coverage | Requirements | Tested | Partial | Inspect | Deferred |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: |",
+    ]
+    for class_item in suite["classes"]:
+        applicable = [
+            item
+            for item in catalog["requirements"]
+            if class_item["name"] in item["applies_to"]
+            or "All Conformance Classes" in item["applies_to"]
+        ]
+        counts = Counter(item["disposition"] for item in applicable)
+        lines.append(
+            f"| {class_item['name']} | {class_item['coverage']} | {len(applicable)} | "
+            f"{counts['tested']} | {counts['partially-tested']} | "
+            f"{counts['inspection-required']} | {counts['deferred']} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Requirement matrix",
+            "",
+        "| ID | Source | Requirement | Applies to | Disposition | Tests / evidence | Verification |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for item in catalog["requirements"]:
+        references = [*item["test_ids"], *item["evidence"]]
+        cells = [
+            item["id"],
+            f"§{item['section']} / occurrence {item['source_occurrence']}",
+            item["requirement"],
+            ", ".join(item["applies_to"]),
+            item["disposition"],
+            ", ".join(f"`{value}`" for value in references) or "—",
+            item["verification"],
+        ]
+        lines.append("| " + " | ".join(markdown_cell(value) for value in cells) + " |")
+    lines.extend(
+        [
+            "",
+            "## Explicit exclusions",
+            "",
+        ]
+    )
+    for item in catalog["excluded_occurrences"]:
+        lines.append(
+            f"- Occurrence {item['source_occurrence']} (`{item['keyword']}`): {item['reason']}"
+        )
+    lines.extend(
+        [
+            "",
+            "The UTF-8/LF-normalized source digest and occurrence accounting are checked mechanically by "
+            "`python tools/conformance.py audit-requirements`. Any normative keyword edit "
+            "requires an explicit matrix update.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def audit_requirements(suite: dict[str, Any], write: bool = False) -> dict[str, Any]:
+    catalog = load_requirements(suite)
+    rendered = render_requirements(catalog, suite)
+    if write:
+        REQUIREMENTS_MARKDOWN_PATH.write_text(rendered, encoding="utf-8")
+    elif not REQUIREMENTS_MARKDOWN_PATH.is_file():
+        raise ConformanceFailure("generated requirements matrix is missing")
+    elif REQUIREMENTS_MARKDOWN_PATH.read_text(encoding="utf-8") != rendered:
+        raise ConformanceFailure("generated requirements matrix is stale")
+    return catalog
 
 
 def execute_oracles() -> dict[str, tuple[bool, str]]:
@@ -235,6 +420,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     verify = subparsers.add_parser("verify-report", help="verify a self-assessment report")
     verify.add_argument("report", help="path to the JSON report")
+
+    requirements = subparsers.add_parser(
+        "audit-requirements", help="verify normative requirement traceability"
+    )
+    requirements.add_argument(
+        "--write", action="store_true", help="regenerate the human-readable matrix"
+    )
     return parser
 
 
@@ -249,6 +441,15 @@ def main() -> int:
             print(
                 f"OK: suite={suite['suite_id']}, pass={report['summary']['pass']}, "
                 f"not_run={report['summary']['not_run']}, claims=0"
+            )
+            return 0
+        if args.command == "audit-requirements":
+            catalog = audit_requirements(suite, write=args.write)
+            summary = catalog["summary"]
+            print(
+                f"OK: requirements={summary['total']}, tested={summary['tested']}, "
+                f"partial={summary['partially_tested']}, "
+                f"inspection={summary['inspection_required']}, deferred={summary['deferred']}"
             )
             return 0
         report = load_json(Path(args.report))

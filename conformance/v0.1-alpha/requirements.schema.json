@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SPEC normative requirements traceability catalog",
+  "type": "object",
+  "required": [
+    "catalog_id",
+    "spec",
+    "status",
+    "source",
+    "excluded_occurrences",
+    "requirements",
+    "summary"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "catalog_id": {"type": "string", "pattern": "^SPEC-REQUIREMENTS-[A-Z0-9.-]+$"},
+    "spec": {"const": "0.1-alpha"},
+    "status": {"const": "exercise"},
+    "source": {
+      "type": "object",
+      "required": ["path", "normalization", "sha256", "normative_keyword_occurrences"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "normalization": {"const": "utf-8-lf"},
+        "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "normative_keyword_occurrences": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "excluded_occurrences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_occurrence", "keyword", "reason"],
+        "properties": {
+          "source_occurrence": {"type": "integer", "minimum": 1},
+          "keyword": {"enum": ["MUST", "MUST NOT"]},
+          "reason": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source_occurrence",
+          "section",
+          "keyword",
+          "requirement",
+          "applies_to",
+          "disposition",
+          "test_ids",
+          "evidence",
+          "verification"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^SPEC-[0-9]{2}-[0-9]{3}$"},
+          "source_occurrence": {"type": "integer", "minimum": 1},
+          "section": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)?$"},
+          "keyword": {"enum": ["MUST", "MUST NOT"]},
+          "requirement": {"type": "string", "minLength": 1},
+          "applies_to": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "disposition": {
+            "enum": ["tested", "partially-tested", "inspection-required", "deferred"]
+          },
+          "test_ids": {
+            "type": "array",
+            "items": {"type": "string", "pattern": "^CV-[A-Z0-9-]+$"},
+            "uniqueItems": true
+          },
+          "evidence": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "verification": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total", "tested", "partially_tested", "inspection_required", "deferred"],
+      "properties": {
+        "total": {"type": "integer", "minimum": 0},
+        "tested": {"type": "integer", "minimum": 0},
+        "partially_tested": {"type": "integer", "minimum": 0},
+        "inspection_required": {"type": "integer", "minimum": 0},
+        "deferred": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

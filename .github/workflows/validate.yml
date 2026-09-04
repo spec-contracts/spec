@@ -24,3 +24,4 @@ jobs:
         run: |
           python tools/conformance.py run --output "$RUNNER_TEMP/spec-conformance-report.json"
           python tools/conformance.py verify-report "$RUNNER_TEMP/spec-conformance-report.json"
+          python tools/conformance.py audit-requirements
