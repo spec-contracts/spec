@@ -1,0 +1,301 @@
+{
+  "$schema": "suite.schema.json",
+  "suite_id": "SPEC-CONFORMANCE-V0.1-ALPHA.1",
+  "spec": "0.1-alpha",
+  "status": "draft",
+  "claim_model": "self-assessment",
+  "certification": false,
+  "classes": [
+    {
+      "name": "Core Consumer",
+      "coverage": "included",
+      "required_tests": [
+        "CV-ADDRESS-VALID",
+        "CV-ADDRESS-INVALID",
+        "CV-SCHEMAS-VALID",
+        "CV-DESCRIPTORS-VALID",
+        "CV-NOMINAL-IDENTITY",
+        "CV-REQUIRED-EXTENSION",
+        "CV-IMMUTABLE-VERSION",
+        "CV-NAMESPACE-IDENTITY",
+        "CV-OPTIONAL-EXTENSION-PRESERVE"
+      ]
+    },
+    {
+      "name": "Core Publisher",
+      "coverage": "not-yet-covered",
+      "required_tests": []
+    },
+    {
+      "name": "Resolver",
+      "coverage": "included",
+      "required_tests": [
+        "CV-BINDING-RESOLUTION",
+        "CV-IMPLEMENTATION-RESOLUTION",
+        "CV-DIGEST-MISMATCH"
+      ]
+    },
+    {
+      "name": "Representation Handler",
+      "coverage": "included",
+      "required_tests": ["CV-BOUNDARY-VALUES"]
+    },
+    {
+      "name": "Processor Descriptor Publisher",
+      "coverage": "not-yet-covered",
+      "required_tests": []
+    },
+    {
+      "name": "Processor Host",
+      "coverage": "included",
+      "required_tests": [
+        "CV-STATE-FAIL-CLOSED",
+        "CV-HOST-EXECUTES",
+        "CV-HOST-EFFECTS"
+      ]
+    },
+    {
+      "name": "Composer",
+      "coverage": "not-yet-covered",
+      "required_tests": []
+    },
+    {
+      "name": "Planner",
+      "coverage": "included",
+      "required_tests": [
+        "CV-PROCESSOR-EDGE",
+        "CV-TRANSITIVE-ROUTE",
+        "CV-ROUTE-DETERMINISTIC"
+      ]
+    },
+    {
+      "name": "State-Capable Host",
+      "coverage": "not-yet-covered",
+      "required_tests": []
+    },
+    {
+      "name": "Provenance Producer",
+      "coverage": "included",
+      "required_tests": [
+        "CV-RECEIPT-CHAIN",
+        "CV-RECEIPT-EMISSION",
+        "CV-RECEIPT-DIGEST-LINK"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "CV-ADDRESS-VALID",
+      "title": "Accept every valid symbolic address vector",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "addresses",
+      "fixture": "../../fixtures/addresses/valid.json",
+      "requirement": "Resource and binding addresses are deterministically parseable.",
+      "expectation": "accept"
+    },
+    {
+      "id": "CV-ADDRESS-INVALID",
+      "title": "Reject every invalid symbolic address vector",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "addresses",
+      "fixture": "../../fixtures/addresses/invalid.json",
+      "requirement": "Malformed or ambiguous symbolic addresses are rejected.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-SCHEMAS-VALID",
+      "title": "Accept all canonical descriptor and representation schemas",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "schemas",
+      "fixture": "../../schemas/v0",
+      "requirement": "Published schemas are valid JSON Schema 2020-12 documents.",
+      "expectation": "accept"
+    },
+    {
+      "id": "CV-DESCRIPTORS-VALID",
+      "title": "Accept the canonical descriptor catalog",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "catalog",
+      "fixture": "../../examples/pdpp",
+      "requirement": "Core descriptors validate against their schemas and integrity rules.",
+      "expectation": "accept"
+    },
+    {
+      "id": "CV-NOMINAL-IDENTITY",
+      "title": "Reject structural similarity as semantic identity",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "same-structure-wrong-contract",
+      "requirement": "Structural compatibility does not imply semantic compatibility.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-BINDING-RESOLUTION",
+      "title": "Reject a missing required Representation Binding",
+      "classes": ["Resolver"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "missing-required-binding",
+      "requirement": "Referenced Representation Bindings resolve explicitly.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-PROCESSOR-EDGE",
+      "title": "Reject an incompatible Processor edge",
+      "classes": ["Planner"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "incompatible-processor-edge",
+      "requirement": "Route compatibility is nominal and explicit.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-REQUIRED-EXTENSION",
+      "title": "Reject an unknown required extension",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "unknown-required-extension",
+      "requirement": "Unknown required extensions cause explicit incompatibility.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-IMPLEMENTATION-RESOLUTION",
+      "title": "Reject an unresolved ProcessorImplementation",
+      "classes": ["Resolver"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "unresolved-processor-implementation",
+      "requirement": "ProcessorImplementation identity resolves to its Processor Version.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-STATE-FAIL-CLOSED",
+      "title": "Reject unsupported required state",
+      "classes": ["Processor Host"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "unsupported-required-state",
+      "requirement": "A host fails closed when it cannot satisfy a required State Port.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-RECEIPT-CHAIN",
+      "title": "Reject a malformed Receipt chain",
+      "classes": ["Provenance Producer"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "malformed-receipt-chain",
+      "requirement": "Adjacent Receipt output and input digests link exactly.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-IMMUTABLE-VERSION",
+      "title": "Reject a mutated immutable Contract Version",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "mutated-immutable-contract-version",
+      "requirement": "One immutable Contract identity cannot select mutated content.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-NAMESPACE-IDENTITY",
+      "title": "Reject ambiguous Namespace identity",
+      "classes": ["Core Consumer"],
+      "mode": "automated",
+      "oracle": "negative",
+      "fixture": "../../fixtures/negative/cases.json",
+      "negative_case": "ambiguous-namespace-identity",
+      "requirement": "A Namespace alias cannot silently select between immutable identities.",
+      "expectation": "reject"
+    },
+    {
+      "id": "CV-TRANSITIVE-ROUTE",
+      "title": "Derive the canonical two-stage routes",
+      "classes": ["Planner"],
+      "mode": "automated",
+      "oracle": "catalog",
+      "fixture": "../../examples/pdpp",
+      "requirement": "A Planner discovers transitive routes from declared Processor edges.",
+      "expectation": "accept"
+    },
+    {
+      "id": "CV-OPTIONAL-EXTENSION-PRESERVE",
+      "title": "Preserve an unknown optional extension",
+      "classes": ["Core Consumer"],
+      "mode": "implementation-evidence",
+      "requirement": "Unknown optional extensions are ignorable and preservable.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-DIGEST-MISMATCH",
+      "title": "Reject an exact-byte artifact digest mismatch",
+      "classes": ["Resolver"],
+      "mode": "implementation-evidence",
+      "requirement": "A referenced artifact with the wrong SHA-256 digest is rejected.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-BOUNDARY-VALUES",
+      "title": "Validate values at every selected Representation Binding",
+      "classes": ["Representation Handler"],
+      "mode": "implementation-evidence",
+      "requirement": "Source, intermediate, and output values satisfy selected bindings.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-HOST-EXECUTES",
+      "title": "Execute the selected ProcessorImplementation",
+      "classes": ["Processor Host"],
+      "mode": "implementation-evidence",
+      "requirement": "The host invokes a compatible implementation while preserving Processor identity.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-HOST-EFFECTS",
+      "title": "Fail closed for unauthorized unsafe and open-world effects",
+      "classes": ["Processor Host"],
+      "mode": "implementation-evidence",
+      "requirement": "Unsupported or unauthorized effect requirements are not silently ignored.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-ROUTE-DETERMINISTIC",
+      "title": "Return the same route for the same catalog and query",
+      "classes": ["Planner"],
+      "mode": "implementation-evidence",
+      "requirement": "Reference planning behavior is deterministic and inspectable.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-RECEIPT-EMISSION",
+      "title": "Emit a conforming Receipt for every executed stage",
+      "classes": ["Provenance Producer"],
+      "mode": "implementation-evidence",
+      "requirement": "Execution Receipts record semantic, implementation, and value identities.",
+      "expectation": "demonstrate"
+    },
+    {
+      "id": "CV-RECEIPT-DIGEST-LINK",
+      "title": "Link adjacent stage value digests",
+      "classes": ["Provenance Producer"],
+      "mode": "implementation-evidence",
+      "requirement": "A stage output digest equals the consuming stage input digest.",
+      "expectation": "demonstrate"
+    }
+  ]
+}

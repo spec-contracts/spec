@@ -1,0 +1,152 @@
+{
+  "task_id": "spec-c002-conformance",
+  "series": "B",
+  "profile": "code-change",
+  "query": "Add implementation-independent SPEC v0.1-alpha self-assessed conformance suite without changing protocol surface",
+  "status": "packed",
+  "created_at": "2026-09-04T14:47:26Z",
+  "updated_at": "2026-09-04T14:56:39Z",
+  "repo_root": "C:\\Users\\brenn\\go\\src\\github.com\\spec-contracts\\spec",
+  "workspace": "C:/Users/brenn/go/src/github.com/spec-contracts/spec/devspecs/tasks/spec-c002-conformance",
+  "artifacts": {
+    "series": "B",
+    "index": "B00-index.md",
+    "first_slice": "B01-define-conformance-manifest-runner-and-reports-plan.md",
+    "result": "B01-define-conformance-manifest-runner-and-reports-result.md",
+    "slices": [
+      {
+        "id": "B01",
+        "title": "Define conformance manifest runner and reports",
+        "plan": "B01-define-conformance-manifest-runner-and-reports-plan.md",
+        "result": "B01-define-conformance-manifest-runner-and-reports-result.md",
+        "kind": "slice",
+        "stage": "completed",
+        "decision": "complete",
+        "updated_at": "2026-09-04T14:56:39Z",
+        "latest_checkpoint_id": "cp_20260904T145639Z_b01_completed",
+        "latest_checkpoint": "checkpoints/20260904-145639-completed.md",
+        "latest_checkpoint_json": "checkpoints/20260904-145639-completed.json"
+      }
+    ]
+  },
+  "predicted_context": {
+    "relevant_areas": [
+      "SPEC.md"
+    ],
+    "supporting_context": [
+      {
+        "path": "SPEC.md",
+        "title": "SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts",
+        "kind": "spec",
+        "role": "supporting_context",
+        "evidence": [
+          "section-packed context: SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 5. Symbolic addressing \u003e 5.1 Grammar; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 5. Symbolic addressing \u003e 5.2 Address properties; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 11. Processors and implementations; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 15. Capabilities and conformance",
+          "indexed section match: SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 5. Symbolic addressing \u003e 5.1 Grammar lines 96-131; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 11. Processors and implementations lines 269-301; SPEC v0.1-alpha — Semantic Protocol for Explicit Contracts \u003e 15. Capabilities and conformance lines 394-427",
+          "exact intent ID: direct path/title match",
+          "anchor-first ranking: score 24.000; matches v01alpha; fields title, heading, body",
+          "query term match in path: spec"
+        ]
+      }
+    ],
+    "related_git_receipts": [
+      {
+        "sha": "a6eb431be3e3692e37f44a29e14ae15cfbc4b7a5",
+        "short_sha": "a6eb431",
+        "committed_at": "2026-09-03",
+        "subject": "spec: freeze v0.1-alpha conceptual model",
+        "matched_paths": [
+          "SPEC.md"
+        ],
+        "matched_terms": [
+          "v0.1-alpha",
+          "spec"
+        ],
+        "signals": [
+          "touched 1 packed path(s)",
+          "matched query anchors"
+        ]
+      },
+      {
+        "sha": "344571bdaa5f515a399edb3a13162eafef42b157",
+        "short_sha": "344571b",
+        "committed_at": "2026-09-03",
+        "subject": "Publish SPEC v0.1 descriptor-design baseline",
+        "matched_paths": [
+          "SPEC.md"
+        ],
+        "matched_terms": [
+          "spec"
+        ],
+        "signals": [
+          "touched 1 packed path(s)",
+          "matched query anchors"
+        ]
+      }
+    ]
+  },
+  "advisory_files": [
+    {
+      "path": "README.md",
+      "kind": "prior-edited-source",
+      "source": "checkpoint_fact",
+      "evidence": [
+        "task spec-c001-spec checkpoint cp_20260903T142916Z_a01_validated edited `README.md`"
+      ],
+      "agent_check": "Verify this prior source lead before choosing an edit target."
+    },
+    {
+      "path": "SPEC.md",
+      "kind": "prior-edited-source",
+      "source": "checkpoint_fact",
+      "evidence": [
+        "task spec-c001-spec checkpoint cp_20260903T142916Z_a01_validated edited `SPEC.md`",
+        "task spec-c001-spec checkpoint cp_20260903T142916Z_a01_validated learned: Descriptor publication digests live outside self-describing YAML/JSON; artifact fragments select only after whole-resource byte verification"
+      ],
+      "agent_check": "Verify this prior source lead before choosing an edit target."
+    },
+    {
+      "path": "docs/pdpp-bridge.md",
+      "kind": "prior-edited-source",
+      "source": "checkpoint_fact",
+      "evidence": [
+        "task spec-c001-spec checkpoint cp_20260903T142916Z_a01_validated edited `docs/pdpp-bridge.md`"
+      ],
+      "agent_check": "Verify this prior source lead before choosing an edit target."
+    },
+    {
+      "path": "examples/pdpp/README.md",
+      "kind": "prior-edited-source",
+      "source": "checkpoint_fact",
+      "evidence": [
+        "task spec-c001-spec checkpoint cp_20260903T142916Z_a01_validated edited `examples/pdpp/README.md`"
+      ],
+      "agent_check": "Verify this prior source lead before choosing an edit target."
+    },
+    {
+      "path": "examples/pdpp/bindings/amazon-orders-json.yaml",
+      "kind": "prior-edited-source",
+      "source": "checkpoint_fact",
+      "evidence": [
+        "task spec-c001-spec checkpoint cp_20260903T142916Z_a01_validated edited `examples/pdpp/bindings/amazon-orders-json.yaml`"
+      ],
+      "agent_check": "Verify this prior source lead before choosing an edit target."
+    }
+  ],
+  "confidence": {
+    "primary_file_confidence": "low",
+    "test_coverage_confidence": "low",
+    "docs_config_confidence": "low",
+    "git_receipt_confidence": "high",
+    "noise_risk": "low",
+    "pack_completeness": "low",
+    "why": [
+      "no clear primary implementation file was found",
+      "test companion coverage was not evident from the initial pack",
+      "found 2 related Git receipt(s)"
+    ],
+    "agent_instruction": "Validate the test and integration surface before editing. Record critical misses and distracting inclusions in the slice result or a task checkpoint."
+  },
+  "durability": {
+    "required": true
+  }
+}

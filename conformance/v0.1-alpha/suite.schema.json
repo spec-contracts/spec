@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SPEC conformance suite manifest",
+  "type": "object",
+  "required": [
+    "suite_id",
+    "spec",
+    "status",
+    "claim_model",
+    "certification",
+    "classes",
+    "tests"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "suite_id": {"type": "string", "minLength": 1},
+    "spec": {"const": "0.1-alpha"},
+    "status": {"const": "draft"},
+    "claim_model": {"const": "self-assessment"},
+    "certification": {"const": false},
+    "classes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "coverage", "required_tests"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "coverage": {"enum": ["included", "not-yet-covered"]},
+          "required_tests": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "classes",
+          "mode",
+          "requirement",
+          "expectation"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^CV-[A-Z0-9-]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "classes": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "mode": {"enum": ["automated", "implementation-evidence"]},
+          "oracle": {"enum": ["addresses", "schemas", "catalog", "negative"]},
+          "fixture": {"type": "string", "minLength": 1},
+          "negative_case": {"type": "string", "minLength": 1},
+          "requirement": {"type": "string", "minLength": 1},
+          "expectation": {"enum": ["accept", "reject", "demonstrate"]}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"mode": {"const": "automated"}}},
+            "then": {"required": ["oracle", "fixture"]}
+          }
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -27,6 +27,7 @@ Executable evidence is maintained separately in
 - [`schemas/v0/`](schemas/v0/) — JSON Schema 2020-12 descriptor grammars
 - [`examples/pdpp/`](examples/pdpp/) — PDP-Connect synthetic commerce stress test
 - [`fixtures/`](fixtures/) — conformance fixtures, beginning with address parsing
+- [`conformance/v0.1-alpha/`](conformance/v0.1-alpha/) — draft self-assessment suite and report format
 - [`docs/pdpp-bridge.md`](docs/pdpp-bridge.md) — deliberately narrow PDPP bridge
 - [`docs/kalo-mapping.md`](docs/kalo-mapping.md) — non-normative Kalo mapping
 - [`tools/validate.py`](tools/validate.py) — local schema and fixture validation
@@ -48,11 +49,19 @@ record may separately digest descriptor bytes.
 
 ```shell
 python tools/validate.py
+python tools/conformance.py run --output conformance-report.json
+python tools/conformance.py verify-report conformance-report.json
 ```
 
 The validator uses Python 3 plus `PyYAML` and `jsonschema`. It checks every
 schema, validates descriptor examples and exact artifact digests, tests address
 fixtures, and rejects the nine focused architectural negative fixtures.
+
+The draft conformance runner packages those checks into a machine-readable
+report and enforces all-required-tests gates for claimed capability classes.
+Implementation behavior that the canonical oracle cannot execute is reported
+as `not-run`, never inferred as passing. This is self-assessment tooling, not a
+certification program.
 
 ## License
 

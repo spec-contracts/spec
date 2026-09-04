@@ -1,0 +1,143 @@
+{
+  "schema_version": 3,
+  "event_kind": "task_checkpoint",
+  "checkpoint_id": "cp_20260904T145639Z_b01_completed",
+  "supersedes_checkpoint_ids": [
+    "cp_20260904T145620Z_b01_completed"
+  ],
+  "task_id": "spec-c002-conformance",
+  "target": "B01",
+  "series": "B",
+  "query": "Add implementation-independent SPEC v0.1-alpha self-assessed conformance suite without changing protocol surface",
+  "slice": "B01",
+  "slice_title": "Define conformance manifest runner and reports",
+  "parent_slice": "B01",
+  "stage": "completed",
+  "decision": "complete",
+  "created_at": "2026-09-04T14:56:39Z",
+  "goal": "Close conformance suite scope audit",
+  "description": "The initial retrieval pack had no primary implementation surface; the written plan was widened before edits to the conformance manifest, runner, tests, docs, and CI. Audit drift is an expected retrieval miss, not implementation scope creep.",
+  "resources": [
+    "../B00-index.md",
+    "../B01-define-conformance-manifest-runner-and-reports-plan.md",
+    "../B01-define-conformance-manifest-runner-and-reports-result.md",
+    "../task.json"
+  ],
+  "files_edited": [
+    ".github/workflows/validate.yml",
+    "README.md",
+    "STATUS.md",
+    "conformance/v0.1-alpha/README.md",
+    "conformance/v0.1-alpha/report.schema.json",
+    "conformance/v0.1-alpha/suite.json",
+    "conformance/v0.1-alpha/suite.schema.json",
+    "devspecs/tasks/spec-c002-conformance/B00-index.md",
+    "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-plan.md",
+    "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-result.md",
+    "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.json",
+    "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.md",
+    "devspecs/tasks/spec-c002-conformance/task.json",
+    "tools/conformance.py",
+    "tools/test_conformance.py"
+  ],
+  "missed_files": [
+    "conformance/v0.1-alpha/**",
+    "tools/conformance.py",
+    "tools/test_conformance.py",
+    ".github/workflows/validate.yml",
+    "README.md",
+    "STATUS.md"
+  ],
+  "actual_context": {
+    "files_edited": [
+      ".github/workflows/validate.yml",
+      "README.md",
+      "STATUS.md",
+      "conformance/v0.1-alpha/README.md",
+      "conformance/v0.1-alpha/report.schema.json",
+      "conformance/v0.1-alpha/suite.json",
+      "conformance/v0.1-alpha/suite.schema.json",
+      "devspecs/tasks/spec-c002-conformance/B00-index.md",
+      "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-plan.md",
+      "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-result.md",
+      "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.json",
+      "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.md",
+      "devspecs/tasks/spec-c002-conformance/task.json",
+      "tools/conformance.py",
+      "tools/test_conformance.py"
+    ]
+  },
+  "predicted_context_feedback": {
+    "critical_missed": [
+      "conformance/v0.1-alpha/**",
+      "tools/conformance.py",
+      "tools/test_conformance.py",
+      ".github/workflows/validate.yml",
+      "README.md",
+      "STATUS.md"
+    ]
+  },
+  "evidence": {
+    "git_diff": {
+      "command": "git status --short --untracked-files=all; git diff --stat; git diff --name-only; git diff --cached --name-only; git ls-files --others --exclude-standard",
+      "status": " M .github/workflows/validate.yml\n M README.md\n M STATUS.md\n?? conformance/v0.1-alpha/README.md\n?? conformance/v0.1-alpha/report.schema.json\n?? conformance/v0.1-alpha/suite.json\n?? conformance/v0.1-alpha/suite.schema.json\n?? devspecs/tasks/spec-c002-conformance/B00-index.md\n?? devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-plan.md\n?? devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-result.md\n?? devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.json\n?? devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.md\n?? devspecs/tasks/spec-c002-conformance/task.json\n?? tools/conformance.py\n?? tools/test_conformance.py\n",
+      "stat": " .github/workflows/validate.yml | 5 +++++\n README.md                      | 9 +++++++++\n STATUS.md                      | 6 ++++++\n 3 files changed, 20 insertions(+)\n",
+      "changed_files": [
+        ".github/workflows/validate.yml",
+        "README.md",
+        "STATUS.md",
+        "conformance/v0.1-alpha/README.md",
+        "conformance/v0.1-alpha/report.schema.json",
+        "conformance/v0.1-alpha/suite.json",
+        "conformance/v0.1-alpha/suite.schema.json",
+        "devspecs/tasks/spec-c002-conformance/B00-index.md",
+        "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-plan.md",
+        "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-result.md",
+        "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.json",
+        "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.md",
+        "devspecs/tasks/spec-c002-conformance/task.json",
+        "tools/conformance.py",
+        "tools/test_conformance.py"
+      ],
+      "max_bytes": 12000,
+      "truncated": false
+    },
+    "git_diff_paths": [
+      ".github/workflows/validate.yml",
+      "README.md",
+      "STATUS.md",
+      "conformance/v0.1-alpha/README.md",
+      "conformance/v0.1-alpha/report.schema.json",
+      "conformance/v0.1-alpha/suite.json",
+      "conformance/v0.1-alpha/suite.schema.json",
+      "devspecs/tasks/spec-c002-conformance/B00-index.md",
+      "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-plan.md",
+      "devspecs/tasks/spec-c002-conformance/B01-define-conformance-manifest-runner-and-reports-result.md",
+      "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.json",
+      "devspecs/tasks/spec-c002-conformance/checkpoints/20260904-145620-completed.md",
+      "devspecs/tasks/spec-c002-conformance/task.json",
+      "tools/conformance.py",
+      "tools/test_conformance.py"
+    ],
+    "plan_refs": [
+      "../B00-index.md",
+      "../B01-define-conformance-manifest-runner-and-reports-plan.md",
+      "../B01-define-conformance-manifest-runner-and-reports-result.md",
+      "../task.json"
+    ]
+  },
+  "learnings": [
+    {
+      "learning_type": "planning",
+      "summary": "Initial DevSpecs retrieval found no conformance implementation surface; the task plan was explicitly refined around new tooling files before implementation",
+      "evidence_refs": [
+        "B01 plan"
+      ],
+      "applies_to": "spec-c002-conformance",
+      "confidence": "high"
+    }
+  ],
+  "next": {
+    "recommended_decision": "complete"
+  }
+}

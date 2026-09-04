@@ -19,3 +19,8 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - run: python -m pip install -r requirements-dev.txt
       - run: python tools/validate.py
+      - run: python tools/test_conformance.py
+      - name: Run and verify draft conformance suite
+        run: |
+          python tools/conformance.py run --output "$RUNNER_TEMP/spec-conformance-report.json"
+          python tools/conformance.py verify-report "$RUNNER_TEMP/spec-conformance-report.json"
